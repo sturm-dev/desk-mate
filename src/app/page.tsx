@@ -1,15 +1,61 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+/* eslint-disable react-hooks/exhaustive-deps */
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+import {
+  User,
+  createClientComponentClient,
+} from "@supabase/auth-helpers-nextjs";
 // import Image from "next/image";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+import { Database } from "@/db";
+import { FullLoading } from "@/components";
+import { useAuthRedirect } from "@/hooks";
+
 import LogoutButton from "./logout-button";
 
-export default async function Index() {
-  const supabase = createServerComponentClient({ cookies });
+export default function Index() {
+  const [mdText, setMdText] = useState("");
+  const [user, setUser] = useState<User>();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const supabase = createClientComponentClient<Database>();
+  const { authLoading } = useAuthRedirect();
+
+  // ─────────────────────────────────────────────────────────────────────
+
+  const getUser = async () => {
+    if (user || authLoading) return;
+
+    const { data } = await supabase.auth.getUser();
+
+    if (data.user) setUser(data.user);
+  };
+
+  const getMdText = useCallback(async () => {
+    if (!user) return;
+
+    const { data } = await supabase
+      .from("md_text")
+      .select("*")
+      .eq("email", user?.email)
+      .single();
+
+    if (data) setMdText(data.md_text);
+  }, [user]);
+
+  // ─────────────────────────────────────────────────────────────────────
+
+  useEffect(() => {
+    getUser();
+    getMdText();
+  }, [authLoading, user]);
+
+  // ─────────────────────────────────────────────────────────────────────
+
+  if (authLoading || !user) return <FullLoading />;
 
   return (
     <div className="flex-1">
@@ -30,6 +76,10 @@ export default async function Index() {
             </Link>
           )}
         </span>
+      </div>
+
+      <div className="p-3">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{mdText}</ReactMarkdown>
       </div>
     </div>
   );
