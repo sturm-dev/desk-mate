@@ -2,10 +2,17 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 // import Image from "next/image";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 import LogoutButton from "./logout-button";
 
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies });
+
+  const markdownText = `
+  - [ ] asd
+  `;
 
   const {
     data: { user },
@@ -30,6 +37,12 @@ export default async function Index() {
             </Link>
           )}
         </span>
+      </div>
+
+      <div className="p-3">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {markdownText}
+        </ReactMarkdown>
       </div>
     </div>
   );
