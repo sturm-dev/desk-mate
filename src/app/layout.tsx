@@ -13,9 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <main className="bg-neutral-900 flex w-screen h-screen">
-          {children}
-        </main>
+        <main className="flex w-screen h-screen">{children}</main>
       </body>
     </html>
   );
