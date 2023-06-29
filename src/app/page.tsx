@@ -40,7 +40,7 @@ export default function Index() {
 
   return (
     <div className="flex-1">
-      <div className="flex border-b py-3 text-sm text-neutral-100 pr-10 bg-neutral-800">
+      <div className="flex border-b border-neutral-700 py-3 text-sm text-neutral-100 pr-10 bg-neutral-800">
         <span className="ml-auto">
           {user ? (
             <span className="flex gap-4">

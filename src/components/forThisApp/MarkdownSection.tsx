@@ -10,6 +10,8 @@ import {
 
 import { Database } from "@/db";
 
+// TODO: check md not working good (when using # the text is not big)
+
 export const MarkdownSection = ({ user }: { user: User }) => {
   const [mdText, setMdText] = useState("");
 
@@ -32,7 +34,7 @@ export const MarkdownSection = ({ user }: { user: User }) => {
   }, [user]);
 
   return (
-    <div className="flex flex-1 border-r p-2">
+    <div className="flex flex-1 border-r border-neutral-700 p-2 flex-col">
       <ReactMarkdown remarkPlugins={[remarkGfm]}>{mdText}</ReactMarkdown>
     </div>
   );
