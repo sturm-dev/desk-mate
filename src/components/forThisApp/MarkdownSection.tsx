@@ -34,8 +34,28 @@ export const MarkdownSection = ({ user }: { user: User }) => {
   }, [user]);
 
   return (
-    <div className="flex flex-1 border-r border-neutral-700 p-2 flex-col">
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>{mdText}</ReactMarkdown>
+    <div className="flex flex-1 border-r border-neutral-700 p-4 flex-col">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={{
+          h1: ({ node, ...props }) => (
+            <h1 className="text-2xl font-bold mb-2" {...props} />
+          ),
+          h2: ({ node, ...props }) => (
+            <h2 className="text-xl font-bold" {...props} />
+          ),
+          h3: ({ node, ...props }) => (
+            <h3 className="text-lg font-bold" {...props} />
+          ),
+          h4: ({ node, ...props }) => (
+            <h4 className="text-base font-bold" {...props} />
+          ),
+          hr: ({ node, ...props }) => <hr className="mb-5 mt-6" {...props} />,
+        }}
+      >
+        {mdText}
+      </ReactMarkdown>
+      <h2>asd</h2>
     </div>
   );
 };
