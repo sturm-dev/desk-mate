@@ -9,25 +9,28 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      md_text: {
+      all_data: {
         Row: {
+          calendar_text: string
           email: string
           md_text: string
           owner_id: string
         }
         Insert: {
+          calendar_text: string
           email: string
           md_text: string
           owner_id: string
         }
         Update: {
+          calendar_text?: string
           email?: string
           md_text?: string
           owner_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "md_text_owner_id_fkey"
+            foreignKeyName: "all_data_owner_id_fkey"
             columns: ["owner_id"]
             referencedRelation: "users"
             referencedColumns: ["id"]

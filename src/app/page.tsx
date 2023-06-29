@@ -57,7 +57,7 @@ export default function Index() {
 
       <div className="flex h-screen w-screen bg-neutral-900">
         <MarkdownSection user={user} />
-        <CalendarSection />
+        <CalendarSection user={user} />
       </div>
     </div>
   );

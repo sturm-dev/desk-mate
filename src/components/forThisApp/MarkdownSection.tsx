@@ -19,7 +19,7 @@ export const MarkdownSection = ({ user }: { user: User }) => {
     if (!user) return;
 
     const { data } = await supabase
-      .from("md_text")
+      .from("all_data")
       .select("*")
       .eq("email", user?.email)
       .single();
