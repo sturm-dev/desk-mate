@@ -40,39 +40,31 @@ export default function Index() {
 
   return (
     <div className="flex-1">
-      <div className="flex border-b border-neutral-700 py-3 text-sm text-neutral-100 pr-10 bg-neutral-800">
-        <span className="ml-auto">
-          {user ? (
-            <span className="flex gap-4">
-              Hey, {user.email}! <span className="border-r"></span>{" "}
-              <LogoutButton />
-            </span>
-          ) : (
-            <Link href="/login" className="text-neutral-100 hover:underline">
-              Login
-            </Link>
-          )}
-        </span>
-      </div>
-
       <div className="flex h-screen w-screen bg-neutral-900">
         <div className="flex flex-1 flex-col">
-          <div className="flex flex-1 border-b border-neutral-800 flex-col">
-            <MarkdownSection
-              title="TODO today:"
-              user={user}
-              field="daily_md_text"
-            />
-          </div>
+          <MarkdownSection title="daily:" user={user} field="daily__md_text" />
           <div className="flex flex-1 flex-col">
             <MarkdownSection
-              title="TODO this week:"
+              title="weekly:"
               user={user}
-              field="week_md_text"
+              field="week__md_text"
+            />
+            <MarkdownSection
+              title="not forget:"
+              user={user}
+              field="not_forget__md_text"
             />
           </div>
         </div>
         <CalendarSection user={user} />
+      </div>
+      {/* ───────────────────────────────────────────────────── */}
+      <div className="flex py-3 pr-10 bg-neutral-900 border-t border-neutral-800">
+        <span className="ml-auto">
+          <span className="flex gap-4">
+            {user.email} <span className="border-r"></span> <LogoutButton />
+          </span>
+        </span>
       </div>
     </div>
   );

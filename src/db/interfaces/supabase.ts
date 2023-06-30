@@ -11,25 +11,28 @@ export interface Database {
     Tables: {
       all_data: {
         Row: {
-          calendar_text: string
-          daily_md_text: string
+          calendar_text: string | null
+          daily__md_text: string | null
           email: string
+          not_forget__md_text: string | null
           owner_id: string
-          week_md_text: string
+          week__md_text: string | null
         }
         Insert: {
-          calendar_text: string
-          daily_md_text: string
+          calendar_text?: string | null
+          daily__md_text?: string | null
           email: string
+          not_forget__md_text?: string | null
           owner_id: string
-          week_md_text: string
+          week__md_text?: string | null
         }
         Update: {
-          calendar_text?: string
-          daily_md_text?: string
+          calendar_text?: string | null
+          daily__md_text?: string | null
           email?: string
+          not_forget__md_text?: string | null
           owner_id?: string
-          week_md_text?: string
+          week__md_text?: string | null
         }
         Relationships: [
           {

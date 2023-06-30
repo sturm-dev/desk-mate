@@ -1,7 +1,5 @@
 ## todo-now
 
-- [ ] update on save (sockets?)
-- [ ] weekly (1/3 size daily)
 
 ---
 

@@ -24,7 +24,7 @@ export const CalendarSection = ({ user }: { user: User }) => {
       .eq("email", user?.email)
       .single();
 
-    if (data) setCalendarText(data.calendar_text);
+    if (data) setCalendarText(data.calendar_text || "");
   }, [user]);
 
   const subscribeToChanges = () =>

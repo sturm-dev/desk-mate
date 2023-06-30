@@ -10,7 +10,7 @@ import {
 
 import { Database } from "@/db";
 
-type ItsAMdField = `${string}_md_text`;
+type ItsAMdField = `${string}__md_text`;
 type TableFields = keyof Database["public"]["Tables"]["all_data"]["Row"];
 type MdTableField = TableFields & ItsAMdField;
 
@@ -36,7 +36,7 @@ export const MarkdownSection = ({
       .eq("email", user?.email)
       .single();
 
-    if (data) setMdText(data[field]);
+    if (data) setMdText(data[field] || "");
   }, [user]);
 
   const subscribeToChanges = () =>
@@ -57,11 +57,9 @@ export const MarkdownSection = ({
   return (
     <div className="flex flex-1 border-r border-neutral-700 flex-col">
       {title ? (
-        <div className="text-xl mb-2 bg-neutral-800 pb-1 p-2 justify-center flex">
-          {title}
-        </div>
+        <div className="p-1 bg-neutral-800 justify-center flex">{title}</div>
       ) : null}
-      <div className="p-4 flex-col">
+      <div className="p-2 pl-3 flex-col">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
