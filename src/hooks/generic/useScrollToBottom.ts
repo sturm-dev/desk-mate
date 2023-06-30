@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
-export const useScrollToBottom = ({ readyToRun }: { readyToRun: boolean }) => {
+export const useScrollToBottom = ({
+  readyToRun,
+  openFullScreen = () => {},
+}: {
+  readyToRun: boolean;
+  openFullScreen: () => void;
+}) => {
   const [alreadyScrollToBottom, setAlreadyScrollToBottom] = useState(false);
 
   const bottomDiv_ref = useRef<null | HTMLDivElement>(null);
@@ -9,17 +15,8 @@ export const useScrollToBottom = ({ readyToRun }: { readyToRun: boolean }) => {
     if (!readyToRun || alreadyScrollToBottom) return;
 
     setTimeout(() => {
-      let elem = document.documentElement;
-
-      elem
-        .requestFullscreen({ navigationUI: "show" })
-        .then(() => {})
-        .catch((err) => {
-          alert(
-            `An error occurred while trying to switch into fullscreen mode: ${err.message} (${err.name})`
-          );
-        });
-    }, 2000);
+      openFullScreen();
+    }, 1500);
 
     setTimeout(() => {
       bottomDiv_ref?.current?.scrollIntoView({
@@ -27,7 +24,7 @@ export const useScrollToBottom = ({ readyToRun }: { readyToRun: boolean }) => {
         behavior: "smooth",
       });
       setAlreadyScrollToBottom(true);
-    }, 4000);
+    }, 2000);
   }, [readyToRun]);
 
   return { bottomDiv_ref };
