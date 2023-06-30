@@ -56,7 +56,22 @@ export default function Index() {
       </div>
 
       <div className="flex h-screen w-screen bg-neutral-900">
-        <MarkdownSection user={user} />
+        <div className="flex flex-1 flex-col">
+          <div className="flex flex-1 border-b border-neutral-800 flex-col">
+            <MarkdownSection
+              title="TODO today:"
+              user={user}
+              field="daily_md_text"
+            />
+          </div>
+          <div className="flex flex-1 flex-col">
+            <MarkdownSection
+              title="TODO this week:"
+              user={user}
+              field="week_md_text"
+            />
+          </div>
+        </div>
         <CalendarSection user={user} />
       </div>
     </div>

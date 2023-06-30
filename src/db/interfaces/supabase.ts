@@ -12,21 +12,24 @@ export interface Database {
       all_data: {
         Row: {
           calendar_text: string
+          daily_md_text: string
           email: string
-          md_text: string
           owner_id: string
+          week_md_text: string
         }
         Insert: {
           calendar_text: string
+          daily_md_text: string
           email: string
-          md_text: string
           owner_id: string
+          week_md_text: string
         }
         Update: {
           calendar_text?: string
+          daily_md_text?: string
           email?: string
-          md_text?: string
           owner_id?: string
+          week_md_text?: string
         }
         Relationships: [
           {
