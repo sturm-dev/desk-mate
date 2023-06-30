@@ -10,13 +10,17 @@ import {
 
 import { Database } from "@/db";
 
+type ItsAMdField = `${string}_md_text`;
+type TableFields = keyof Database["public"]["Tables"]["all_data"]["Row"];
+type MdTableField = TableFields & ItsAMdField;
+
 export const MarkdownSection = ({
   user,
   field,
   title,
 }: {
   user: User;
-  field: keyof Database["public"]["Tables"]["all_data"]["Row"];
+  field: MdTableField;
   title?: string;
 }) => {
   const [mdText, setMdText] = useState("");
@@ -35,7 +39,18 @@ export const MarkdownSection = ({
     if (data) setMdText(data[field]);
   }, [user]);
 
+  const subscribeToChanges = () =>
+    supabase
+      .channel("table-db-changes")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "all_data" },
+        getMdText
+      )
+      .subscribe();
+
   useEffect(() => {
+    subscribeToChanges();
     getMdText();
   }, [user]);
 

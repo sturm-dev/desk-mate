@@ -27,9 +27,20 @@ export const CalendarSection = ({ user }: { user: User }) => {
     if (data) setCalendarText(data.calendar_text);
   }, [user]);
 
+  const subscribeToChanges = () =>
+    supabase
+      .channel("table-db-changes")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "all_data" },
+        getCalendarText
+      )
+      .subscribe();
+
   // ─────────────────────────────────────────────────────────────────────
 
   useEffect(() => {
+    subscribeToChanges();
     getCalendarText();
   }, [user]);
 
