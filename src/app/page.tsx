@@ -1,40 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import {
-  User,
-  createClientComponentClient,
-} from "@supabase/auth-helpers-nextjs";
-import Link from "next/link";
-
-import { Database } from "@/db";
 import { CalendarSection, FullLoading, MarkdownSection } from "@/components";
-import { useAuthRedirect } from "@/hooks";
+import { useAuthRedirect, useUserData } from "@/hooks";
 
 import LogoutButton from "./logout-button";
 
 export default function Index() {
-  const [user, setUser] = useState<User>();
-
-  const supabase = createClientComponentClient<Database>();
   const { authLoading } = useAuthRedirect();
-
-  // ─────────────────────────────────────────────────────────────────────
-
-  const getUser = async () => {
-    if (user || authLoading) return;
-
-    const { data } = await supabase.auth.getUser();
-    if (data.user) setUser(data.user);
-  };
-
-  // ─────────────────────────────────────────────────────────────────────
-
-  useEffect(() => {
-    getUser();
-  }, [authLoading, user]);
-
-  // ─────────────────────────────────────────────────────────────────────
+  const { user, userData } = useUserData({ authLoading });
 
   if (authLoading || !user) return <FullLoading />;
 
@@ -50,21 +23,16 @@ export default function Index() {
       {/* ───────────────────────────────────────────────────── */}
       <div className="flex h-screen w-screen bg-neutral-900">
         <div className="flex flex-1 flex-col">
-          <MarkdownSection title="daily:" user={user} field="daily__md_text" />
+          <MarkdownSection title="daily:" mdText={userData?.daily__md_text} />
           <div className="flex flex-1 flex-col">
-            <MarkdownSection
-              title="weekly:"
-              user={user}
-              field="week__md_text"
-            />
+            <MarkdownSection title="weekly:" mdText={userData?.week__md_text} />
             <MarkdownSection
               title="not forget:"
-              user={user}
-              field="not_forget__md_text"
+              mdText={userData?.not_forget__md_text}
             />
           </div>
         </div>
-        <CalendarSection user={user} />
+        <CalendarSection text={userData?.calendar_text} />
       </div>
     </div>
   );

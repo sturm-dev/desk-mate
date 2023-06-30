@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body suppressHydrationWarning={true}>
         <main className="flex w-screen h-screen">{children}</main>
       </body>
     </html>

@@ -1,59 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import {
-  User,
-  createClientComponentClient,
-} from "@supabase/auth-helpers-nextjs";
-
-import { Database } from "@/db";
-
-type ItsAMdField = `${string}__md_text`;
-type TableFields = keyof Database["public"]["Tables"]["all_data"]["Row"];
-type MdTableField = TableFields & ItsAMdField;
 
 export const MarkdownSection = ({
-  user,
-  field,
+  mdText,
   title,
 }: {
-  user: User;
-  field: MdTableField;
+  mdText: string | null | undefined;
   title?: string;
 }) => {
-  const [mdText, setMdText] = useState("");
-
-  const supabase = createClientComponentClient<Database>();
-
-  const getMdText = useCallback(async () => {
-    if (!user) return;
-
-    const { data } = await supabase
-      .from("all_data")
-      .select("*")
-      .eq("email", user?.email)
-      .single();
-
-    if (data) setMdText(data[field] || "");
-  }, [user]);
-
-  const subscribeToChanges = () =>
-    supabase
-      .channel("table-db-changes")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "all_data" },
-        getMdText
-      )
-      .subscribe();
-
-  useEffect(() => {
-    subscribeToChanges();
-    getMdText();
-  }, [user]);
-
   return (
     <div className="flex flex-1 border-r border-neutral-700 flex-col">
       {title ? (
@@ -78,7 +34,7 @@ export const MarkdownSection = ({
             hr: ({ node, ...props }) => <hr className="mb-5 mt-6" {...props} />,
           }}
         >
-          {mdText}
+          {mdText || ""}
         </ReactMarkdown>
       </div>
     </div>

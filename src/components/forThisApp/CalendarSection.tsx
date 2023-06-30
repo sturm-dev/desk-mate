@@ -1,48 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
-import {
-  User,
-  createClientComponentClient,
-} from "@supabase/auth-helpers-nextjs";
+import { useEffect, useState } from "react";
 
-import { Database } from "@/db";
-
-export const CalendarSection = ({ user }: { user: User }) => {
+export const CalendarSection = ({
+  text,
+}: {
+  text: string | null | undefined;
+}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [calendarText, setCalendarText] = useState("");
   const [windowHeight, setWindowHeight] = useState(0);
-
-  const supabase = createClientComponentClient<Database>();
-
-  // ─────────────────────────────────────────────────────────────────────
-
-  const getCalendarText = useCallback(async () => {
-    if (!user) return;
-
-    const { data } = await supabase
-      .from("all_data")
-      .select("*")
-      .eq("email", user?.email)
-      .single();
-
-    if (data) setCalendarText(data.calendar_text || "");
-  }, [user]);
-
-  const subscribeToChanges = () =>
-    supabase
-      .channel("table-db-changes")
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "all_data" },
-        getCalendarText
-      )
-      .subscribe();
-
-  // ─────────────────────────────────────────────────────────────────────
-
-  useEffect(() => {
-    subscribeToChanges();
-    getCalendarText();
-  }, [user]);
 
   useEffect(() => {
     const interval = setInterval(() => setCurrentDate(new Date()), 1000);
@@ -81,7 +45,7 @@ export const CalendarSection = ({ user }: { user: User }) => {
             <p>{hour}</p>
           </div>
           <div className="flex items-center flex-1 border-l border-neutral-700 p-1 pl-2">
-            {getTextFromHour({ hour, text: calendarText })}
+            {getTextFromHour({ hour, text: text || "" })}
           </div>
         </div>
       ))}
