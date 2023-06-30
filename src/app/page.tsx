@@ -40,6 +40,14 @@ export default function Index() {
 
   return (
     <div className="flex-1">
+      <div className="flex py-3 pr-10 bg-neutral-900 border-b border-neutral-800">
+        <span className="ml-auto">
+          <span className="flex gap-4">
+            {user.email} <span className="border-r"></span> <LogoutButton />
+          </span>
+        </span>
+      </div>
+      {/* ───────────────────────────────────────────────────── */}
       <div className="flex h-screen w-screen bg-neutral-900">
         <div className="flex flex-1 flex-col">
           <MarkdownSection title="daily:" user={user} field="daily__md_text" />
@@ -57,14 +65,6 @@ export default function Index() {
           </div>
         </div>
         <CalendarSection user={user} />
-      </div>
-      {/* ───────────────────────────────────────────────────── */}
-      <div className="flex py-3 pr-10 bg-neutral-900 border-t border-neutral-800">
-        <span className="ml-auto">
-          <span className="flex gap-4">
-            {user.email} <span className="border-r"></span> <LogoutButton />
-          </span>
-        </span>
       </div>
     </div>
   );
