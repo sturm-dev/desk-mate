@@ -27,7 +27,7 @@ export const AboutSection = ({
   };
 
   return (
-    <div className="border-t border-r border-neutral-700">
+    <div className="border-r border-neutral-700">
       <div className="flex items-center justify-center">
         <button className="p-2" onClick={onSwitchFullScreenMode}>
           <Image
