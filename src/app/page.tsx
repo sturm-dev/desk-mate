@@ -1,18 +1,22 @@
 "use client";
 
 import { CalendarSection, FullLoading, MarkdownSection } from "@/components";
-import { useAuthRedirect, useUserData } from "@/hooks";
+import { useAuthRedirect, useScrollToBottom, useUserData } from "@/hooks";
 
 import LogoutButton from "./logout-button";
 
 export default function Index() {
   const { authLoading } = useAuthRedirect();
   const { user, userData } = useUserData({ authLoading });
+  const { bottomDiv_ref } = useScrollToBottom({
+    readyToRun: !authLoading && !!user,
+  });
 
   if (authLoading || !user) return <FullLoading />;
 
   return (
     <div className="flex-1">
+      {/* ───────────────────────────────────────────────────── */}
       <div className="flex py-3 pr-10 bg-neutral-900 border-b border-neutral-800">
         <span className="ml-auto">
           <span className="flex gap-4">
@@ -34,6 +38,8 @@ export default function Index() {
         </div>
         <CalendarSection text={userData?.calendar_text} />
       </div>
+      {/* ───────────────────────────────────────────────────── */}
+      <div ref={bottomDiv_ref} />
     </div>
   );
 }
