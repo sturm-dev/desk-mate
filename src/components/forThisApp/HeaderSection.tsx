@@ -14,7 +14,7 @@ import {
 } from "@/assets";
 import { APP_VERSION } from "@/config";
 
-export const AboutSection = ({
+export const HeaderSection = ({
   fullScreenHandle,
   ref_div,
   currentDate,

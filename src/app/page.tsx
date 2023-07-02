@@ -3,7 +3,7 @@
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 import {
-  AboutSection,
+  HeaderSection,
   CalendarSection,
   FullLoading,
   MarkdownSection,
@@ -42,7 +42,7 @@ export default function Index() {
           ref={ref_divFather}
           className="flex flex-col h-screen w-screen bg-neutral-900"
         >
-          <AboutSection
+          <HeaderSection
             ref_div={ref_divHeader}
             fullScreenHandle={fullScreenHandle}
             currentDate={currentDate}
