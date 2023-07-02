@@ -1,5 +1,6 @@
 ## todo-now
 
+- [ ] header with the Day and time
 
 ---
 

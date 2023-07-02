@@ -1,37 +1,33 @@
 import { useEffect, useState } from "react";
 
+const padding = 8;
+
 export const CalendarSection = ({
   text,
+  height,
 }: {
   text: string | null | undefined;
+  height: number;
 }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [windowHeight, setWindowHeight] = useState(0);
+
+  const innerHeight = height - padding * 2;
 
   useEffect(() => {
-    const interval = setInterval(() => setCurrentDate(new Date()), 1000);
+    const interval = setInterval(() => {
+      setCurrentDate(new Date());
+      console.log("interval running...");
+    }, 1000 * 60); // every minute
     return () => {
       clearInterval(interval);
     };
   }, []);
 
-  // ─────────────────────────────────────────────────────────────────────
-  const reportWindowSize = () => setWindowHeight(window.innerHeight);
-  useEffect(() => {
-    setWindowHeight(window.innerHeight); // first time
-
-    window.addEventListener("resize", reportWindowSize);
-
-    return () => {
-      window.removeEventListener("resize", reportWindowSize);
-    };
-  }, []);
-  // ─────────────────────────────────────────────────────────────────────
-
   return (
     <div
       id="calendar_section_div"
-      className="flex flex-1 p-2 flex-col relative"
+      className="flex flex-1 flex-col relative"
+      style={{ padding: `${padding}px` }}
     >
       {hours.map((hour, i) => (
         <div
@@ -39,7 +35,7 @@ export const CalendarSection = ({
             !isLastItem(i, hours) ? "border-b border-neutral-700" : ""
           } flex flex-row`}
           key={hour}
-          style={{ height: windowHeight / hours.length }}
+          style={{ height: innerHeight / hours.length }}
         >
           <div className="flex items-center justify-center h-full px-2 w-10">
             <p>{hour}</p>
@@ -53,7 +49,7 @@ export const CalendarSection = ({
         <div className="w-full h-full">
           <div
             className="absolute w-full items-center flex flex-row -ml-2"
-            style={{ top: getHourLinePosition({ windowHeight, currentDate }) }}
+            style={{ top: getHourLinePosition({ innerHeight, currentDate }) }}
           >
             <div className="bg-red-500 h-4 w-4 rounded-lg" />
             <div className="border-b border-red-500 w-full" />
@@ -76,14 +72,13 @@ const getTextFromHour = ({ text, hour }: { text: string; hour: string }) => {
 };
 
 const getHourLinePosition = ({
-  windowHeight,
+  innerHeight,
   currentDate,
 }: {
-  windowHeight: number;
+  innerHeight: number;
   currentDate: Date;
 }) => {
-  const divHeight = windowHeight - 16; // tailwind_p2 = 8px
-  const hourBoxSize = divHeight / hours.length;
+  const hourBoxSize = innerHeight / hours.length;
 
   const date_hour = currentDate.getHours();
   const date_minutes = currentDate.getMinutes();

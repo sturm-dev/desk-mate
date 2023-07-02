@@ -1,5 +1,6 @@
 "use client";
 
+import { MutableRefObject } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -10,8 +11,10 @@ import { APP_VERSION } from "@/config";
 
 export const AboutSection = ({
   fullScreenHandle,
+  ref_div,
 }: {
   fullScreenHandle: FullScreenHandle;
+  ref_div?: MutableRefObject<HTMLDivElement | null>;
 }) => {
   const router = useRouter();
   const supabase = createClientComponentClient();
@@ -27,7 +30,7 @@ export const AboutSection = ({
   };
 
   return (
-    <div className="border-r border-neutral-700">
+    <div ref={ref_div} className="border-b border-neutral-800">
       <div className="flex items-center justify-center">
         <button className="p-2" onClick={onSwitchFullScreenMode}>
           <Image

@@ -11,7 +11,7 @@ export const MarkdownSection = ({
   title?: string;
 }) => {
   return (
-    <div className="flex flex-1 border-r border-neutral-700 flex-col">
+    <div className="flex flex-1 border-r border-neutral-800 flex-col">
       {title ? (
         <div className="p-1 bg-neutral-800 justify-center flex">{title}</div>
       ) : null}
