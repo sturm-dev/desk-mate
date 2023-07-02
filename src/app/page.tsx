@@ -8,12 +8,19 @@ import {
   FullLoading,
   MarkdownSection,
 } from "@/components";
-import { useAuthRedirect, useGetDivDimensions, useUserData } from "@/hooks";
+import {
+  useAuthRedirect,
+  useGetDateEveryMinute,
+  useGetDivDimensions,
+  useUserData,
+} from "@/hooks";
 
 export default function Index() {
   const fullScreenHandle = useFullScreenHandle();
   const { authLoading } = useAuthRedirect();
   const { user, userData } = useUserData({ authLoading });
+
+  const { currentDate } = useGetDateEveryMinute();
 
   // ─────────────────────────────────────────────────────────────────────
   const { dimensions: dimensions_divFather, div_ref: ref_divFather } =
@@ -38,6 +45,7 @@ export default function Index() {
           <AboutSection
             ref_div={ref_divHeader}
             fullScreenHandle={fullScreenHandle}
+            currentDate={currentDate}
           />
           <div className="flex flex-1 flex-row">
             <div className="flex flex-1 flex-col">
@@ -60,6 +68,7 @@ export default function Index() {
             <CalendarSection
               text={userData?.calendar_text}
               height={body_height}
+              currentDate={currentDate}
             />
           </div>
         </div>

@@ -1,27 +1,15 @@
-import { useEffect, useState } from "react";
-
 const padding = 8;
 
 export const CalendarSection = ({
   text,
   height,
+  currentDate,
 }: {
   text: string | null | undefined;
   height: number;
+  currentDate: Date;
 }) => {
-  const [currentDate, setCurrentDate] = useState(new Date());
-
   const innerHeight = height - padding * 2;
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentDate(new Date());
-      console.log("interval running...");
-    }, 1000 * 60); // every minute
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
 
   return (
     <div

@@ -5,16 +5,23 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { FullScreenHandle } from "react-full-screen";
+import dayjs from "dayjs";
 
-import { Image_EnterFullScreen, Image_ExitFullScreen } from "@/assets";
+import {
+  Image_EnterFullScreen,
+  Image_ExitFullScreen,
+  Image_Gear,
+} from "@/assets";
 import { APP_VERSION } from "@/config";
 
 export const AboutSection = ({
   fullScreenHandle,
   ref_div,
+  currentDate,
 }: {
   fullScreenHandle: FullScreenHandle;
   ref_div?: MutableRefObject<HTMLDivElement | null>;
+  currentDate: Date;
 }) => {
   const router = useRouter();
   const supabase = createClientComponentClient();
@@ -32,7 +39,21 @@ export const AboutSection = ({
   return (
     <div ref={ref_div} className="border-b border-neutral-800">
       <div className="flex items-center justify-center">
-        <button className="p-2" onClick={onSwitchFullScreenMode}>
+        <div className="p-2">
+          <span className="text-xl p-2">
+            {dayjs(currentDate).format("dddd MMMM D - h:mm a")}
+          </span>
+        </div>
+        <div className="flex-1" />
+        <div className="pr-2">
+          <span className="text-2xl">🐒</span>
+        </div>
+        <div className="pr-1">
+          <span className="text-xs text-neutral-500">
+            desk-mate v{APP_VERSION}
+          </span>
+        </div>
+        <button className="p-2 pr-1" onClick={onSwitchFullScreenMode}>
           <Image
             alt={`${fullScreenHandle.active ? "exit" : "enter"} fullScreen`}
             src={
@@ -44,18 +65,16 @@ export const AboutSection = ({
             height={20}
           />
         </button>
-        <div>
-          <span className="text-xs text-neutral-500">
-            desk-mate v{APP_VERSION}
-          </span>
-        </div>
-        <div className="flex-1" />
-        <div className="text-xs pr-4 underline">
-          <button onClick={signOut}>
-            <p className="text-neutral-500">Logout</p>
-          </button>
+        <div className="px-2">
+          <Image alt="settings" src={Image_Gear} width={26} height={26} />
         </div>
       </div>
     </div>
   );
 };
+
+/* <div className="text-xs pr-4 underline">
+    <button onClick={signOut}>
+      <p className="text-neutral-500">Logout</p>
+    </button>
+  </div> */
