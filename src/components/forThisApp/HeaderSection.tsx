@@ -13,6 +13,7 @@ import {
   Image_Gear,
 } from "@/assets";
 import { APP_VERSION } from "@/config";
+import { OptionsDropdown } from "./OptionsDropdown";
 
 export const HeaderSection = ({
   fullScreenHandle,
@@ -41,7 +42,7 @@ export const HeaderSection = ({
       <div className="flex items-center justify-center">
         <div className="p-2">
           <span className="text-xl p-2">
-            {dayjs(currentDate).format("dddd MMMM D - h:mm a")}
+            {dayjs(currentDate).format("dddd MMMM D - HH:mm")}
           </span>
         </div>
         <div className="flex-1" />
@@ -49,7 +50,7 @@ export const HeaderSection = ({
           <span className="text-2xl">🐒</span>
         </div>
         <div className="pr-1">
-          <span className="text-xs text-neutral-500">
+          <span className="text-sm text-neutral-500">
             desk-mate v{APP_VERSION}
           </span>
         </div>
@@ -65,16 +66,12 @@ export const HeaderSection = ({
             height={20}
           />
         </button>
-        <div className="px-2">
-          <Image alt="settings" src={Image_Gear} width={26} height={26} />
-        </div>
+        <OptionsDropdown onLogout={signOut}>
+          <div className="px-2">
+            <Image alt="settings" src={Image_Gear} width={26} height={26} />
+          </div>
+        </OptionsDropdown>
       </div>
     </div>
   );
 };
-
-/* <div className="text-xs pr-4 underline">
-    <button onClick={signOut}>
-      <p className="text-neutral-500">Logout</p>
-    </button>
-  </div> */

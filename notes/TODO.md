@@ -1,6 +1,9 @@
 ## todo-now
 
-- [ ] header with the Day and time
+- [x] header with the Day and time
+    - [x] options dropdown
+
+- [ ] fullScreen icon-images to svg
 
 ---
 
