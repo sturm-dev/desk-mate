@@ -10,6 +10,9 @@
 ## todo-later
 
 - [ ] good admin panel to edit fields
+    - [ ] data save in the db only for specific days (after the day passes -> calendar not show that data)
+    - [ ] can add some task for specific day
+    - [ ] tasks not completed see the next day
 - [ ] fullScreen icon-images to svg
 
 - [ ] app version go to gist changelog
