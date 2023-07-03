@@ -13,7 +13,9 @@ export const MarkdownSection = ({
   return (
     <div className="flex flex-1 border-r border-neutral-800 flex-col">
       {title ? (
-        <div className="p-1 bg-neutral-800 justify-center flex">{title}</div>
+        <div className="p-1 bg-black bg-opacity-40 justify-center flex">
+          {title}
+        </div>
       ) : null}
       <div className="p-2 pl-3 flex-col">
         <ReactMarkdown

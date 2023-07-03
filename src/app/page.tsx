@@ -7,6 +7,7 @@ import {
   CalendarSection,
   FullLoading,
   MarkdownSection,
+  BgAnimatedGradient,
 } from "@/components";
 import {
   useAuthRedirect,
@@ -36,43 +37,42 @@ export default function Index() {
 
   return (
     <FullScreen handle={fullScreenHandle}>
-      <div className="flex-1">
-        {/* ───────────────────────────────────────────────────── */}
-        <div
-          ref={ref_divFather}
-          className="flex flex-col h-screen w-screen bg-neutral-900"
-        >
-          <HeaderSection
-            ref_div={ref_divHeader}
-            fullScreenHandle={fullScreenHandle}
-            currentDate={currentDate}
-          />
-          <div className="flex flex-1 flex-row">
-            <div className="flex flex-1 flex-col">
-              {/* ───────────────────────────────────────────────────── */}
-              <MarkdownSection
-                title="📅 Today"
-                mdText={userData?.daily__md_text}
-              />
-              <div className="flex flex-1 flex-col">
-                <MarkdownSection
-                  title="🗓️ This week"
-                  mdText={userData?.week__md_text}
-                />
-                <MarkdownSection
-                  title="📌 Do not forget"
-                  mdText={userData?.not_forget__md_text}
-                />
-              </div>
-            </div>
-            <CalendarSection
-              text={userData?.calendar_text}
-              height={body_height}
+      <BgAnimatedGradient>
+        <div className="flex-1">
+          {/* ───────────────────────────────────────────────────── */}
+          <div ref={ref_divFather} className="flex flex-col h-screen w-screen">
+            <HeaderSection
+              ref_div={ref_divHeader}
+              fullScreenHandle={fullScreenHandle}
               currentDate={currentDate}
             />
+            <div className="flex flex-1 flex-row">
+              <div className="flex flex-1 flex-col">
+                {/* ───────────────────────────────────────────────────── */}
+                <MarkdownSection
+                  title={`📅 Today`}
+                  mdText={userData?.daily__md_text}
+                />
+                <div className="flex flex-1 flex-col">
+                  <MarkdownSection
+                    title="🗓️ This week"
+                    mdText={userData?.week__md_text}
+                  />
+                  <MarkdownSection
+                    title="📌 Do not forget"
+                    mdText={userData?.not_forget__md_text}
+                  />
+                </div>
+              </div>
+              <CalendarSection
+                text={userData?.calendar_text}
+                height={body_height}
+                currentDate={currentDate}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </BgAnimatedGradient>
     </FullScreen>
   );
 }

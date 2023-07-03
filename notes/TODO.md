@@ -1,16 +1,14 @@
 ## todo-now
 
-- [x] header with the Day and time
-    - [x] options dropdown
-
-- [ ] fullScreen icon-images to svg
+- [x] something with movement (like screen saver)
 
 ---
 
 ## todo-later
 
-- [ ] something with movement (like screen saver)
 - [ ] short loop-youtube video in background to prevent screen to sleep?
+
+- [ ] fullScreen icon-images to svg
 
 - [ ] good admin panel to edit fields
 
