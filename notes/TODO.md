@@ -9,11 +9,10 @@
 
 ## todo-later
 
-- [ ] short loop-youtube video in background to prevent screen to sleep?
-
+- [ ] good admin panel to edit fields
 - [ ] fullScreen icon-images to svg
 
-- [ ] good admin panel to edit fields
+- [ ] app version go to gist changelog
 
 ---
 

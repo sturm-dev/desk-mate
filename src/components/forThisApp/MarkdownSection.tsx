@@ -12,7 +12,7 @@ export const MarkdownSection = ({
 }) => {
   const parseMdText = () => {
     // complete checkboxes to green & text from complete tasks to strikeout text
-    mdText = mdText?.replace(/- \[x\] (.*)/g, "\n✅ ~~$1~~");
+    mdText = mdText?.replace(/- \[x\] (.*)/g, "\n✔️ ~~$1~~");
     return mdText;
   };
 
