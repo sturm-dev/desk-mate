@@ -1,6 +1,9 @@
 ## todo-now
 
-- [x] something with movement (like screen saver)
+- [x] better checkboxes ui (green when completed)
+- [x] check screen not to sleep with youtube video (+30')
+    - [ ] add youtube video to bg to screen not go to sleep
+- [ ] can switch the checkboxes
 
 ---
 

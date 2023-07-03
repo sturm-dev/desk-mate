@@ -10,6 +10,12 @@ export const MarkdownSection = ({
   mdText: string | null | undefined;
   title?: string;
 }) => {
+  const parseMdText = () => {
+    // complete checkboxes to green & text from complete tasks to strikeout text
+    mdText = mdText?.replace(/- \[x\] (.*)/g, "\n✅ ~~$1~~");
+    return mdText;
+  };
+
   return (
     <div className="flex flex-1 border-r border-neutral-800 flex-col">
       {title ? (
@@ -33,10 +39,19 @@ export const MarkdownSection = ({
             h4: ({ node, ...props }) => (
               <h4 className="text-base font-bold" {...props} />
             ),
-            hr: ({ node, ...props }) => <hr className="mb-5 mt-6" {...props} />,
+            hr: ({ node, ...props }) => (
+              <div
+                className="mb-2 mt-3 bg-neutral-700"
+                style={{ height: "1px" }}
+                {...props}
+              />
+            ),
+            p: ({ node, ...props }) => (
+              <p className="text-neutral-700 opacity-70" {...props} />
+            ),
           }}
         >
-          {mdText || ""}
+          {parseMdText() || ""}
         </ReactMarkdown>
       </div>
     </div>
