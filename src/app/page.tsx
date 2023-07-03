@@ -1,7 +1,6 @@
 "use client";
 
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
-import YouTube, { YouTubeProps } from "react-youtube";
 
 import {
   HeaderSection,
@@ -9,6 +8,7 @@ import {
   FullLoading,
   MarkdownSection,
   BgAnimatedGradient,
+  YoutubeBgPlayer,
 } from "@/components";
 import {
   useAuthRedirect,
@@ -32,32 +32,6 @@ export default function Index() {
 
   const body_height =
     dimensions_divFather?.height - dimensions_divHeader?.height;
-  // ─────────────────────────────────────────────────────────────────────
-  const onPlayerReady: YouTubeProps["onReady"] = (event) => {
-    // access to player in all event handlers via event.target
-    console.log(`onPlayerReady - event.target`, event.target);
-    setTimeout(() => {
-      event.target.setVolume(0);
-      event.target.playVideo();
-    }, 500);
-    setTimeout(() => {
-      event.target.pauseVideo();
-    }, 1000);
-    setTimeout(() => {
-      event.target.playVideo();
-    }, 1500);
-  };
-
-  const opts: YouTubeProps["opts"] = {
-    height: "500",
-    width: "500",
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      // mute: 1,
-      // autoplay: 1,
-      // loop: 1,
-    },
-  };
   // ─────────────────────────────────────────────────────────────────────
 
   if (authLoading || !user) return <FullLoading />;
@@ -98,16 +72,7 @@ export default function Index() {
               />
             </div>
             {/* youtube video running on background to screen not to sleep */}
-            <YouTube
-              videoId="V1bFr2SWP1I"
-              opts={opts}
-              onReady={onPlayerReady}
-            />
-            {/* <iframe
-              width="200"
-              height="200"
-              src="https://www.youtube.com/embed/V1bFr2SWP1I?autoplay=1&mute=1&loop=1"
-            /> */}
+            <YoutubeBgPlayer />
           </div>
         </div>
       </BgAnimatedGradient>
