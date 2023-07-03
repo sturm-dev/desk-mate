@@ -70,6 +70,12 @@ export default function Index() {
                 currentDate={currentDate}
               />
             </div>
+            {/* youtube video running on background to screen not to sleep */}
+            <iframe
+              width="0"
+              height="0"
+              src="https://www.youtube.com/embed/V1bFr2SWP1I?autoplay=1&mute=1&loop=1"
+            />
           </div>
         </div>
       </BgAnimatedGradient>
