@@ -2,8 +2,11 @@
 
 - [x] better checkboxes ui (green when completed)
 - [x] check screen not to sleep with youtube video (+30')
-    - [ ] add youtube video to bg to screen not go to sleep
-- [ ] can switch the checkboxes
+    - [x] add youtube video to bg to screen not go to sleep
+    - [ ] fix youtube always running on bg
+
+- [ ] new db organization
+- [ ] admin panel
 
 ---
 
