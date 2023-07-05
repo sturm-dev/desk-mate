@@ -43,6 +43,21 @@ export interface Database {
           }
         ]
       }
+      app_config: {
+        Row: {
+          app_version: string | null
+          id: number
+        }
+        Insert: {
+          app_version?: string | null
+          id?: number
+        }
+        Update: {
+          app_version?: string | null
+          id?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

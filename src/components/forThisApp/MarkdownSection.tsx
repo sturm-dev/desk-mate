@@ -2,6 +2,9 @@
 
 import React from "react";
 
+const checkboxChecked = "- [x]";
+const checkboxUnchecked = "- [ ]";
+
 export const MarkdownSection = ({
   mdText,
   title,
@@ -10,23 +13,30 @@ export const MarkdownSection = ({
   title?: string;
 }) => {
   const formatMdText = (str: string) => {
-    return formatCheckboxes(str)
-      .split("\n")
-      .map((text, i) => (
-        <React.Fragment key={`${text}-${i}`}>
-          {text.includes("☑") ? (
-            <p className="line-through text-neutral-700">{text}</p>
-          ) : (
-            <p>{text}</p>
-          )}
-        </React.Fragment>
-      ));
-  };
+    const createObjectsFromText = () => {
+      const allText: { text: string; checked: boolean }[] = [];
+      const lines = str.split("\n");
+      lines.forEach((line) => {
+        if (!line) return;
+        const checked = line.includes(checkboxChecked);
+        const text = line
+          .replaceAll(checkboxChecked, "")
+          .replaceAll(checkboxUnchecked, "");
+        allText.push({ text, checked });
+      });
+      return allText;
+    };
 
-  const formatCheckboxes = (str: string) => {
-    str = str?.replaceAll("- [x]", "☑");
-    str = str?.replaceAll("- [ ]", "◻️");
-    return str;
+    return createObjectsFromText().map(({ checked, text }, i) => (
+      <div key={`${text}-${i}`} className="flex flex-row">
+        <p className={`${checked ? "text-neutral-700" : ""} mr-1`}>
+          {checked ? "☑" : "◻️"}
+        </p>
+        <p className={`${checked ? "line-through text-neutral-700" : ""}`}>
+          {text}
+        </p>
+      </div>
+    ));
   };
 
   return (

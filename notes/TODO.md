@@ -20,6 +20,9 @@
 
 - [ ] app version go to gist changelog
 
+- [ ] show if app needs update
+    - [ ] ask supabase app_config.app_version and show "update" next to the app version (https://github.com/sturm-dev/desk-mate/assets/30802967/2a5355ed-987d-4b00-bd74-d2eae13053aa)
+
 ---
 
 ## ideas
