@@ -1,10 +1,15 @@
 {
   "private": true,
+  "version": "0.1.0",
   "scripts": {
     "dev": "yarn supabase:gen-types && yarn tsc && next dev",
     "build": "next build",
     "start": "next start",
     "-------------------------------": "----------------------------",
+    "precommit": "yarn supabase:gen-types && yarn tsc",
+    "commit": "yarn release-patch && npx git-cz",
+    "release-patch": "npm version patch --force --no-git-tag-version && git add package.json package-lock.json",
+    "--------------------------------": "----------------------------",
     "supabase:gen-types": "npx supabase gen types typescript --project-id isoadnkfemfhmcogmekj > src/db/interfaces/supabase.ts"
   },
   "dependencies": {

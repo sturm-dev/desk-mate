@@ -9,6 +9,7 @@ import {
   MarkdownSection,
   BgAnimatedGradient,
   YoutubeBgPlayer,
+  CenterSection,
 } from "@/components";
 import {
   useAuthRedirect,
@@ -48,7 +49,7 @@ export default function Index() {
               currentDate={currentDate}
             />
             <div className="flex flex-1 flex-row">
-              <div className="flex flex-1 flex-col">
+              <div className="flex w-1/4 flex-col">
                 {/* ───────────────────────────────────────────────────── */}
                 <MarkdownSection
                   title={`📅 Today`}
@@ -65,11 +66,14 @@ export default function Index() {
                   />
                 </div>
               </div>
-              <CalendarSection
-                text={userData?.calendar_text}
-                height={body_height}
-                currentDate={currentDate}
-              />
+              <CenterSection />
+              <div className="w-1/4">
+                <CalendarSection
+                  text={userData?.calendar_text}
+                  height={body_height}
+                  currentDate={currentDate}
+                />
+              </div>
             </div>
             {/* youtube video running on background to screen not to sleep */}
             <YoutubeBgPlayer />

@@ -6,13 +6,13 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { FullScreenHandle } from "react-full-screen";
 import dayjs from "dayjs";
+import packageJson from "~/package.json";
 
 import {
   Image_EnterFullScreen,
   Image_ExitFullScreen,
   Image_Gear,
 } from "@/assets";
-import { APP_VERSION } from "@/config";
 import { OptionsDropdown } from "./OptionsDropdown";
 
 export const HeaderSection = ({
@@ -45,13 +45,15 @@ export const HeaderSection = ({
             {dayjs(currentDate).format("dddd MMMM D - HH:mm")}
           </span>
         </div>
-        <div className="flex-1" />
+        <div className="flex flex-1 justify-center">
+          <p className="text-neutral-700 text-sm">keep it simple</p>
+        </div>
         <div className="pr-2">
           <span className="text-2xl">🐒</span>
         </div>
         <div className="pr-1">
           <span className="text-sm text-neutral-500">
-            desk-mate v{APP_VERSION}
+            desk-mate v{packageJson.version}
           </span>
         </div>
         <button className="p-2 pr-1" onClick={onSwitchFullScreenMode}>

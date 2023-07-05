@@ -30,9 +30,9 @@ export const MarkdownSection = ({
   };
 
   return (
-    <div className="flex flex-1 border-r border-neutral-800 flex-col">
+    <div className="flex flex-1 flex-col">
       {title ? (
-        <div className="p-1 bg-black bg-opacity-40 justify-center flex">
+        <div className="p-1 bg-black bg-opacity-40 justify-center flex text-sm">
           {title}
         </div>
       ) : null}
