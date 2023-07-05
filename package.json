@@ -6,11 +6,13 @@
     "build": "next build",
     "start": "next start",
     "-------------------------------": "----------------------------",
-    "precommit": "echo precommit",
-    "commit": "echo commit",
+    "precommit": "yarn supabase:gen-types && yarn tsc",
+    "commit": "yarn release-patch && npx git-cz",
     "release-patch": "npm version patch --force --no-git-tag-version && git add package.json package-lock.json",
     "--------------------------------": "----------------------------",
-    "supabase:gen-types": "npx supabase gen types typescript --project-id isoadnkfemfhmcogmekj > src/db/interfaces/supabase.ts"
+    "supabase:gen-types": "npx supabase gen types typescript --project-id isoadnkfemfhmcogmekj > src/db/interfaces/supabase.ts",
+    "---------------------------------": "----------------------------",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
@@ -34,6 +36,7 @@
     "@types/node": "20.3.1",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
-    "encoding": "^0.1.13"
+    "encoding": "^0.1.13",
+    "husky": "^8.0.3"
   }
 }
