@@ -8,6 +8,7 @@ export const CenterSection = () => {
         achieve your goal - keep going
       </div>
       <Line />
+      <div>test</div>
     </div>
   );
 };
