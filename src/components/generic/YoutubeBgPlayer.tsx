@@ -25,3 +25,4 @@ export const YoutubeBgPlayer = () => {
 
 // NOTE: try 1:30hs to fix this error without success
 // Failed to execute 'postMessage' on 'DOMWindow': The target origin provided ('https://www.youtube.com') does not match the recipient window's origin
+// https://stackoverflow.com/a/65714232/8215759

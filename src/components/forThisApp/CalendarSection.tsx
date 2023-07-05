@@ -28,7 +28,7 @@ export const CalendarSection = ({
           <div className="flex items-center justify-center h-full px-2 w-10">
             <p>{hour}</p>
           </div>
-          <div className="flex items-center flex-1 border-l border-neutral-700 p-1 pl-2">
+          <div className="flex items-center flex-1 border-l border-neutral-700 p-1 pl-2 text-sm">
             {getTextFromHour({ hour, text: text || "" })}
           </div>
         </div>
