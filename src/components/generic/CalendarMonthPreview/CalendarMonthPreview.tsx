@@ -2,13 +2,13 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import Calendar from "react-calendar";
 
-import "./CalendarPreview.css";
+import "./CalendarMonthPreview.css";
 
-export const CalendarPreview = () => {
+export const CalendarMonthPreview = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   return (
-    <div className="border-l border-neutral-800 pb-2">
+    <div className="border-l border-t border-neutral-800 pb-2">
       <Calendar
         onChange={(date) => setCurrentDate(date as Date)}
         value={currentDate}

@@ -1,6 +1,6 @@
 import { UserDataInterface } from "@/hooks";
 
-import { CalendarPreview } from "../generic";
+import { CalendarMonthPreview } from "../generic";
 import { MarkdownSection } from "./MarkdownSection";
 
 export const CenterSection = ({
@@ -16,13 +16,12 @@ export const CenterSection = ({
         remember what are you doing, where you are now and how close you are to
         achieve your goal - keep going
       </div>
-      <Line />
-      <div className="flex flex-row" style={{ marginTop: -1 }}>
+      <div className="flex flex-row">
         <MarkdownSection
           title="🗓️ This week"
           mdText={userData?.week__md_text}
         />
-        <CalendarPreview />
+        <CalendarMonthPreview />
       </div>
     </div>
   );

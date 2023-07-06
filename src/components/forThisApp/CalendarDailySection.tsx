@@ -1,6 +1,9 @@
-const padding = 8;
+import { useGetDivDimensions } from "@/hooks";
 
-export const CalendarSection = ({
+const padding = 8;
+const hourWidth = 40;
+
+export const CalendarDailySection = ({
   text,
   height,
   currentDate,
@@ -9,7 +12,11 @@ export const CalendarSection = ({
   height: number;
   currentDate: Date;
 }) => {
+  const { dimensions, div_ref } = useGetDivDimensions();
+
   const innerHeight = height - padding * 2;
+
+  console.log(`dimensions`, dimensions);
 
   return (
     <div
@@ -17,22 +24,41 @@ export const CalendarSection = ({
       className="flex flex-1 flex-col relative"
       style={{ padding: `${padding}px` }}
     >
-      {hours.map((hour, i) => (
-        <div
-          className={`${
-            !isLastItem(i, hours) ? "border-b border-neutral-700" : ""
-          } flex flex-row`}
-          key={hour}
-          style={{ height: innerHeight / hours.length }}
-        >
-          <div className="flex items-center justify-center h-full px-2 w-10 text-sm">
-            {hour}
+      {hours.map((hour, i) => {
+        const hourText = getTextFromHour({
+          hour: hour + ":00",
+          text: text || "",
+        });
+        const text30min = getTextFromHour({
+          hour: hour + ":30",
+          text: text || "",
+        });
+
+        let sectionWidth = dimensions?.width - hourWidth;
+        if (text30min) sectionWidth = sectionWidth / 2;
+
+        return (
+          <div
+            ref={div_ref}
+            className={`${
+              !isLastItem(i, hours) ? "border-b border-neutral-700" : ""
+            } flex flex-row`}
+            key={hour}
+            style={{ height: innerHeight / hours.length }}
+          >
+            <div
+              className="flex items-center justify-center h-full px-2 text-sm"
+              style={{ width: hourWidth }}
+            >
+              {hour}
+            </div>
+            <TextComponent text={hourText || ""} width={sectionWidth} />
+            {text30min ? (
+              <TextComponent text={text30min} is30min width={sectionWidth} />
+            ) : null}
           </div>
-          <div className="flex items-center flex-1 border-l border-neutral-700 p-1 pl-2 text-sm">
-            {getTextFromHour({ hour, text: text || "" })}
-          </div>
-        </div>
-      ))}
+        );
+      })}
       <div className="absolute top-0 left-0 w-full h-full py-2">
         <div className="w-full h-full">
           <div
@@ -50,13 +76,32 @@ export const CalendarSection = ({
 
 // ─────────────────────────────────────────────────────────────────────────────
 
+const TextComponent = ({
+  text,
+  width,
+  is30min,
+}: {
+  text: string;
+  width: number;
+  is30min?: boolean;
+}) => (
+  <div
+    className={`border-l border-neutral-700 p-1 ${is30min ? "" : "pl-2"}`}
+    style={{ width }}
+  >
+    <p className="items-center text-sm overflow-hidden whitespace-nowrap text-ellipsis">
+      {text}
+    </p>
+  </div>
+);
+
 const isLastItem = (index: number, array: any[]) => index === array.length - 1;
 
 const getTextFromHour = ({ text, hour }: { text: string; hour: string }) => {
   const lines = text.split("\n");
-  const line = lines.find((line) => line.startsWith(`${hour}:`));
+  const line = lines.find((line) => line.startsWith(`${hour} =`));
   if (!line) return null;
-  return line.split(":")[1].trim();
+  return line.split("=")[1].trim();
 };
 
 const getHourLinePosition = ({

@@ -4,7 +4,7 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 import {
   HeaderSection,
-  CalendarSection,
+  CalendarDailySection,
   FullLoading,
   MarkdownSection,
   BgAnimatedGradient,
@@ -68,7 +68,7 @@ export default function Index() {
               </div>
               <CenterSection userData={userData} />
               <div className="w-1/4">
-                <CalendarSection
+                <CalendarDailySection
                   text={userData?.calendar_text}
                   height={body_height}
                   currentDate={currentDate}
