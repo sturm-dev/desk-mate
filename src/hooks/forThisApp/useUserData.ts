@@ -6,11 +6,11 @@ import {
 
 import { Database } from "@/db";
 
-type UserData = Database["public"]["Tables"]["all_data"]["Row"];
+export type UserDataInterface = Database["public"]["Tables"]["all_data"]["Row"];
 
 export const useUserData = ({ authLoading }: { authLoading: boolean }) => {
   const [user, setUser] = useState<User>();
-  const [userData, setUserData] = useState<UserData>();
+  const [userData, setUserData] = useState<UserDataInterface>();
 
   const supabase = createClientComponentClient<Database>();
 
@@ -30,7 +30,7 @@ export const useUserData = ({ authLoading }: { authLoading: boolean }) => {
         (payload) => {
           // console.log("data updated", payload);
 
-          const newData = payload.new as UserData;
+          const newData = payload.new as UserDataInterface;
           if (payload) setUserData({ ...userData, ...newData });
         }
       )

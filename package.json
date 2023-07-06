@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.1.5",
+  "version": "0.1.6",
   "scripts": {
     "dev": "yarn supabase:gen-types && yarn tsc && next dev",
     "build": "next build",
@@ -25,6 +25,7 @@
     "next": "latest",
     "postcss": "8.4.24",
     "react": "18.2.0",
+    "react-calendar": "^4.3.0",
     "react-dom": "18.2.0",
     "react-full-screen": "^1.1.1",
     "react-youtube": "^10.1.0",

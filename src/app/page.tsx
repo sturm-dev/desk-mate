@@ -55,10 +55,10 @@ export default function Index() {
                   title={`📅 Today`}
                   mdText={userData?.daily__md_text}
                 />
-                <div className="flex flex-1 flex-col">
+                <div className="flex flex-col">
                   <MarkdownSection
-                    title="🗓️ This week"
-                    mdText={userData?.week__md_text}
+                    title="🔥 Beast mode"
+                    mdText={userData?.not_forget__md_text}
                   />
                   <MarkdownSection
                     title="📌 Do not forget"
@@ -66,7 +66,7 @@ export default function Index() {
                   />
                 </div>
               </div>
-              <CenterSection />
+              <CenterSection userData={userData} />
               <div className="w-1/4">
                 <CalendarSection
                   text={userData?.calendar_text}
