@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.1.9",
+  "version": "0.1.10",
   "scripts": {
     "dev": "yarn supabase:gen-types && yarn tsc && next dev",
     "build": "next build",
@@ -8,6 +8,7 @@
     "-------------------------------": "----------------------------",
     "pre-commit": "yarn supabase:gen-types && yarn tsc && yarn upgrade-patch-version",
     "upgrade-patch-version": "npm version patch --force --no-git-tag-version && git add package.json",
+    "post-commit": "git push",
     "--------------------------------": "----------------------------",
     "supabase:gen-types": "npx supabase gen types typescript --project-id isoadnkfemfhmcogmekj > src/db/interfaces/supabase.ts",
     "---------------------------------": "----------------------------",
