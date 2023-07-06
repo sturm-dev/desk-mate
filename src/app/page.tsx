@@ -56,10 +56,7 @@ export default function Index() {
                   mdText={userData?.daily__md_text}
                 />
                 <div className="flex flex-col">
-                  <MarkdownSection
-                    title="🔥 Beast mode"
-                    mdText={userData?.not_forget__md_text}
-                  />
+                  <MarkdownSection title="🔥 Beast mode" mdText="" />
                   <MarkdownSection
                     title="📌 Do not forget"
                     mdText={userData?.not_forget__md_text}

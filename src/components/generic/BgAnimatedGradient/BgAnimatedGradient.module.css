@@ -10,19 +10,17 @@
   background: linear-gradient(
     -45deg,
     black,
-    #1ecbe913,
-    #1ecbe913,
-    #1ecbe913,
-    #1ec9e930,
-    #1ecbe913,
-    #1ecbe913,
-    #1ecbe913,
+    black,
+    #1ecbe920,
+    black,
+    #1ecbe920,
+    black,
     black
   );
-  background-size: 280% 280%;
+  background-size: 600% 600%;
   width: 100%;
   height: 100%;
-  animation: animate 30s ease infinite;
+  animation: animate 60s ease infinite;
 }
 
 @keyframes animate {
