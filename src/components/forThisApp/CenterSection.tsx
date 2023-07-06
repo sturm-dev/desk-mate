@@ -17,7 +17,7 @@ export const CenterSection = ({
         achieve your goal - keep going
       </div>
       <Line />
-      <div className="flex flex-row">
+      <div className="flex flex-row" style={{ marginTop: -1 }}>
         <MarkdownSection
           title="🗓️ This week"
           mdText={userData?.week__md_text}

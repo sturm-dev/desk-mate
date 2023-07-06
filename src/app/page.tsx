@@ -49,7 +49,7 @@ export default function Index() {
               currentDate={currentDate}
             />
             <div className="flex flex-1 flex-row">
-              <div className="flex w-1/4 flex-col">
+              <div className="flex w-1/4 flex-col" style={{ marginTop: -1 }}>
                 {/* ───────────────────────────────────────────────────── */}
                 <MarkdownSection
                   title={`📅 Today`}

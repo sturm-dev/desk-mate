@@ -2,6 +2,7 @@
 
 import React from "react";
 
+const separatorMdText = "---";
 const checkboxChecked = "- [x]";
 const checkboxUnchecked = "- [ ]";
 
@@ -14,10 +15,21 @@ export const MarkdownSection = ({
 }) => {
   const formatMdText = (str: string) => {
     const createObjectsFromText = () => {
-      const allText: { text: string; checked: boolean }[] = [];
-      const lines = str.split("\n");
-      lines.forEach((line) => {
+      const allText: {
+        text?: string;
+        checked?: boolean;
+        separator?: boolean;
+      }[] = [];
+
+      str.split("\n").forEach((line) => {
         if (!line) return;
+
+        const separator = line.includes(separatorMdText);
+        if (separator) {
+          allText.push({ separator });
+          return;
+        }
+
         const checked = line.includes(checkboxChecked);
         const text = line
           .replaceAll(checkboxChecked, "")
@@ -27,14 +39,20 @@ export const MarkdownSection = ({
       return allText;
     };
 
-    return createObjectsFromText().map(({ checked, text }, i) => (
-      <div key={`${text}-${i}`} className="flex flex-row">
-        <p className={`${checked ? "text-neutral-700" : ""} mr-1`}>
-          {checked ? "☑" : "◻️"}
-        </p>
-        <p className={`${checked ? "line-through text-neutral-700" : ""}`}>
-          {text}
-        </p>
+    return createObjectsFromText().map(({ separator, checked, text }, i) => (
+      <div key={i} className="flex flex-row">
+        {separator ? (
+          <div className="bg-neutral-700 w-full my-1.5" style={{ height: 1 }} />
+        ) : (
+          <>
+            <p className={`${checked ? "text-neutral-700" : ""} mr-1`}>
+              {checked ? "☑" : "◻️"}
+            </p>
+            <p className={`${checked ? "line-through text-neutral-700" : ""}`}>
+              {text}
+            </p>
+          </>
+        )}
       </div>
     ));
   };
@@ -42,7 +60,7 @@ export const MarkdownSection = ({
   return (
     <div className="flex flex-1 flex-col">
       {title ? (
-        <div className="p-1 bg-black bg-opacity-40 justify-center flex text-sm">
+        <div className="p-1 bg-black bg-opacity-40 justify-center flex text-sm border-b border-t border-neutral-800">
           {title}
         </div>
       ) : null}

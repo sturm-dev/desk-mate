@@ -40,9 +40,13 @@ export const HeaderSection = ({
   return (
     <div ref={ref_div} className="border-b border-neutral-800">
       <div className="flex items-center justify-center">
-        <div className="p-2">
-          <span className="text-xl p-2">
-            {dayjs(currentDate).format("dddd MMMM D - HH:mm")}
+        <div className="pl-2 flex items-center justify-center">
+          <span className="text-2xl p-2">
+            {dayjs(currentDate).format("HH:mm")}
+          </span>
+          -
+          <span className="text-sm p-2">
+            {dayjs(currentDate).format("dddd D of MMMM")}
           </span>
         </div>
         <div className="flex flex-1 justify-center">
