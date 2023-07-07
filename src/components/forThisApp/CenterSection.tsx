@@ -1,5 +1,5 @@
 import { UserDataInterface } from "@/hooks";
-import { MulishFont } from "@/fonts";
+import { Font_Mulish200 } from "@/fonts";
 
 import { CalendarMonthPreview } from "../generic";
 import { MarkdownSection } from "./MarkdownSection";
@@ -16,7 +16,7 @@ export const CenterSection = ({
       <div className="flex flex-1 p-8 pt-2 pb-6 items-center justify-center">
         <p
           className="text-3xl text-center leading-10"
-          style={{ fontFamily: MulishFont.style.fontFamily }}
+          style={{ fontFamily: Font_Mulish200.style.fontFamily }}
         >
           <span className="text-7xl">R</span>
           emember what are you doing, where you are now and how close you are to

@@ -13,7 +13,7 @@ import {
   Image_ExitFullScreen,
   Image_Gear,
 } from "@/assets";
-import { LatoFont } from "@/fonts";
+import { Font_Lato400 } from "@/fonts";
 import { OptionsDropdown } from "./OptionsDropdown";
 
 export const HeaderSection = ({
@@ -44,7 +44,7 @@ export const HeaderSection = ({
         <div className="pl-2 flex items-center justify-center">
           <span
             className="text-2xl p-2"
-            style={{ fontFamily: LatoFont.style.fontFamily }}
+            style={{ fontFamily: Font_Lato400.style.fontFamily }}
           >
             {dayjs(currentDate).format("HH:mm")}
           </span>

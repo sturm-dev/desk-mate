@@ -37,7 +37,7 @@ export default function Login() {
     router.push("/");
   };
 
-  if (authLoading) return <FullLoading />;
+  if (!authLoading) return <FullLoading />;
 
   return (
     <div className="flex-1 flex items-center justify-center">
