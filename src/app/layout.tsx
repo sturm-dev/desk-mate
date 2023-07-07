@@ -1,3 +1,4 @@
+import { Font_Mulish200 } from "@/fonts";
 import "./globals.css";
 
 export const metadata = {
@@ -13,7 +14,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <main className="flex w-screen h-screen">{children}</main>
+        <main
+          className="flex w-screen h-screen"
+          style={{ fontFamily: Font_Mulish200.style.fontFamily }}
+        >
+          {children}
+        </main>
       </body>
     </html>
   );

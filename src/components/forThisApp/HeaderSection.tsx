@@ -14,6 +14,7 @@ import {
   Image_Gear,
 } from "@/assets";
 import { Font_Lato400 } from "@/fonts";
+
 import { OptionsDropdown } from "./OptionsDropdown";
 
 export const HeaderSection = ({
@@ -59,7 +60,10 @@ export const HeaderSection = ({
         </div>
         <div className="pr-1">
           <span className="text-sm text-neutral-500">
-            desk-mate v{packageJson.version}
+            desk-mate{" "}
+            <span style={{ fontFamily: Font_Lato400.style.fontFamily }}>
+              v{packageJson.version}
+            </span>
           </span>
         </div>
         <button className="p-2 pr-1" onClick={onSwitchFullScreenMode}>

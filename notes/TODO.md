@@ -13,6 +13,8 @@
 
 ## todo-later
 
+- [ ] add section of 3 micro-habits to check every-day (with ✅ streak)
+
 - [ ] good admin panel to edit fields
     - [ ] data save in the db only for specific days (after the day passes -> calendar not show that data)
     - [ ] can add some task for specific day

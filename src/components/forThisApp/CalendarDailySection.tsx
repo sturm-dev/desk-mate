@@ -1,3 +1,4 @@
+import { Font_Lato400 } from "@/fonts";
 import { useGetDivDimensions } from "@/hooks";
 
 const padding = 8;
@@ -44,7 +45,10 @@ export const CalendarDailySection = ({
               !isLastItem(i, hours) ? "border-b border-neutral-700" : ""
             } flex flex-row`}
             key={hour}
-            style={{ height: innerHeight / hours.length }}
+            style={{
+              height: innerHeight / hours.length,
+              fontFamily: Font_Lato400.style.fontFamily,
+            }}
           >
             <div
               className="flex items-center justify-center h-full px-2 text-sm"

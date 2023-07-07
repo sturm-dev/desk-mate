@@ -15,7 +15,7 @@ export const CenterSection = ({
       <Line />
       <div className="flex flex-1 p-8 pt-2 pb-6 items-center justify-center">
         <p
-          className="text-3xl text-center leading-10"
+          className="text-3xl text-center leading-10 tracking-wide"
           style={{ fontFamily: Font_Mulish200.style.fontFamily }}
         >
           <span className="text-7xl">R</span>
