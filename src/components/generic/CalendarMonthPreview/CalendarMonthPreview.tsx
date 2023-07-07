@@ -18,7 +18,6 @@ export const CalendarMonthPreview = () => {
         formatShortWeekday={(_, date) =>
           dayjs(date).format("dd").substring(0, 1)
         }
-        calendarType="Hebrew"
       />
     </div>
   );

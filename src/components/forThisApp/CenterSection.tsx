@@ -11,9 +11,9 @@ export const CenterSection = ({
 }) => {
   return (
     <div className="flex flex-1 border-r border-l border-neutral-800 flex-col">
-      <div className="p-2 text-sm">🎯 goal: $10k usd / month</div>
+      <div className="p-2 text-sm">🎯 Goal: $10k usd / month</div>
       <Line />
-      <div className="flex flex-1 p-8 pb-6 items-center justify-center">
+      <div className="flex flex-1 p-8 pt-2 pb-6 items-center justify-center">
         <p
           className="text-3xl text-center leading-10"
           style={{ fontFamily: MulishFont.style.fontFamily }}

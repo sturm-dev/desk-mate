@@ -53,9 +53,7 @@ export const HeaderSection = ({
             {dayjs(currentDate).format("dddd D of MMMM")}
           </span>
         </div>
-        <div className="flex flex-1 justify-center">
-          <p className="text-neutral-700 text-sm">keep it simple</p>
-        </div>
+        <div className="flex-1" />
         <div className="pr-2">
           <span className="text-2xl">🐒</span>
         </div>

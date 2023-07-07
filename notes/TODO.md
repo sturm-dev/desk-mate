@@ -1,12 +1,13 @@
 ## todo-now
 
-- [x] better checkboxes ui (green when completed)
-- [x] check screen not to sleep with youtube video (+30')
-    - [x] add youtube video to bg to screen not go to sleep
-    - [ ] fix youtube always running on bg
-
 - [ ] new db organization
+    - [x] create tables
+    - [ ] link data with new tables
 - [ ] admin panel
+
+- [ ] on each commit (version upgrade)
+    - [ ] upgrade version on supabase also
+    - [ ] and app when check a new version show a button to update
 
 ---
 
