@@ -58,9 +58,9 @@ export const HeaderSection = ({
         <div className="pr-2">
           <span className="text-2xl">🐒</span>
         </div>
-        <div className="pr-1">
+        <div className="pr-1" onClick={() => router.refresh()}>
           <span className="text-sm text-neutral-500">
-            desk-mate{" "}
+            desk-mate{" - "}
             <span style={{ fontFamily: Font_Lato400.style.fontFamily }}>
               v{packageJson.version}
             </span>
