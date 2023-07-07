@@ -20,7 +20,7 @@ export const CenterSection = ({
         >
           <span className="text-7xl">R</span>
           emember what are you doing, where you are now and how close you are to
-          achieve your goal - keep going
+          achieve your goal - <span className="italic">keep going</span>
         </p>
       </div>
       <div className="flex flex-row">
