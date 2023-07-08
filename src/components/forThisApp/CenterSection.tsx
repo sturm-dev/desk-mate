@@ -31,7 +31,7 @@ export const CenterSection = ({
             components={{
               p: ({ node, ...props }) => <p {...props} />,
               strong: ({ node, ...props }) => (
-                <p
+                <span
                   style={{ fontFamily: Font_Mulish500.style.fontFamily }}
                   {...props}
                 />

@@ -14,8 +14,10 @@
             - [x] check subscription to changes not working
             - [x] daily quote
             - [x] center section with markdown text
+            - [x] get the data only by day or week
+            - [ ] 🔥 check subscription multiple filters
 
-- [ ] 🔥 admin panel
+- [ ] admin panel
 
 - [ ] (hora-feliz) - crear excel y formularios
 - [ ] pagar weas depto

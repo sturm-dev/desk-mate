@@ -41,7 +41,6 @@ export const TABLE_FIELD: {
     created_at: "created_at",
     custom_quote__md_text: "custom_quote__md_text",
     do_not_forget__md_text: "do_not_forget__md_text",
-    id: "id",
     goal: "goal",
     user_email: "user_email",
     user_id: "user_id",

@@ -82,7 +82,6 @@ export interface Database {
           custom_quote__md_text: string | null
           do_not_forget__md_text: string | null
           goal: string | null
-          id: number
           user_email: string
           user_id: string
         }
@@ -91,7 +90,6 @@ export interface Database {
           custom_quote__md_text?: string | null
           do_not_forget__md_text?: string | null
           goal?: string | null
-          id?: number
           user_email: string
           user_id: string
         }
@@ -100,7 +98,6 @@ export interface Database {
           custom_quote__md_text?: string | null
           do_not_forget__md_text?: string | null
           goal?: string | null
-          id?: number
           user_email?: string
           user_id?: string
         }

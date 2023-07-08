@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { User } from "@supabase/auth-helpers-nextjs";
+import dayjs from "dayjs";
 
 import {
   DataByDay_Interface,
@@ -61,6 +62,10 @@ export const useAllDataBy = ({ user }: { user?: User }) => {
 
   // ─────────────────────────────────────────────────────────────────────────────
 
+  // TODO: check this filter method
+  // https://isoadnkfemfhmcogmekj.supabase.co/rest/v1/data_by_day?
+  // select=*&user_email=eq.sturmenta%40gmail.com
+
   const subscribeToChanges = () => {
     if (alreadySubscribed) return;
 
@@ -73,23 +78,50 @@ export const useAllDataBy = ({ user }: { user?: User }) => {
         {
           event: "UPDATE",
           schema: "*",
-          filter: `${TABLE_FIELD.data_by_day.user_email}=eq.${user?.email}`,
-          // TODO: add day/week on filter
-          // DOCS:
-          // You can listen to individual rows using the format
-          // {table}:{col}=eq.{val} - where {col} is the column name,
-          // and {val} is the value which you want to match.
+          table: TABLE_NAME.data_by_day,
+          filter: `${TABLE_FIELD.data_by_day.user_email}=eq.${user?.email}`, // TODO: test with &
         },
         (payload) => {
-          console.log("Change received!", payload);
+          console.log("Change received - data_by_day!", payload);
 
-          if (payload.table === TABLE_NAME.data_by_day) {
-            set_dataByDay(payload.new as DataByDay_Interface);
-          } else if (payload.table === TABLE_NAME.data_by_user) {
-            set_dataByUser(payload.new as DataByUser_Interface);
-          } else if (payload.table === TABLE_NAME.data_by_week) {
-            set_dataByWeek(payload.new as DataByWeek_Interface);
-          }
+          const newData = payload.new as DataByDay_Interface;
+          const actualDay = dayjs().format("YYYY-MM-DD");
+
+          if (newData.day === actualDay) set_dataByDay(newData);
+        }
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "*",
+          table: TABLE_NAME.data_by_week,
+          filter: `${TABLE_FIELD.data_by_week.user_email}=eq.${user?.email}`,
+        },
+        (payload) => {
+          console.log("Change received - data_by_week!", payload);
+
+          const newData = payload.new as DataByWeek_Interface;
+          const mondayDate = dayjs()
+            .startOf("week")
+            .add(1, "day")
+            .format("YYYY-MM-DD");
+
+          if (newData.monday_of_week === mondayDate) set_dataByWeek(newData);
+        }
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "*",
+          table: TABLE_NAME.data_by_user,
+          filter: `${TABLE_FIELD.data_by_user.user_email}=eq.${user?.email}`,
+        },
+        (payload) => {
+          console.log("Change received - data_by_user!", payload);
+
+          set_dataByUser(payload.new as DataByUser_Interface);
         }
       )
       .subscribe();
