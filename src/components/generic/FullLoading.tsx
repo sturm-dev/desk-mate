@@ -4,7 +4,7 @@ export const FullLoading = () => (
   <div className="flex flex-1 flex-col items-center justify-center text-xl">
     <div>
       <p
-        className="absolute opacity-20 tracking-widest -mt-16 w-full -ml-10"
+        className="absolute opacity-40 tracking-widest -mt-16 w-full -ml-10"
         style={{ fontFamily: Font_Lato100.style.fontFamily }}
       >
         Loading your ...

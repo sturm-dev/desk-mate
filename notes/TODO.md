@@ -1,10 +1,10 @@
 ## todo-now
 
-- [ ] new db organization
+- [x] new db organization
     - [x] create tables
-    - [ ] link data with new tables
+    - [x] link data with new tables
         - [x] active rls policies
-        - [ ] read content from new tables
+        - [x] read content from new tables
             - [x] daily md_text
             - [x] daily calendar
             - [x] weekly md_text
@@ -13,11 +13,12 @@
             - [x] do not forget md_text
             - [x] check subscription to changes not working
             - [x] daily quote
-            - [ ] 🔥 center section with markdown text
+            - [x] center section with markdown text
+
+- [ ] 🔥 admin panel
 
 - [ ] (hora-feliz) - crear excel y formularios
-
-- [ ] admin panel
+- [ ] pagar weas depto
 
 - [ ] on each commit (version upgrade)
     - [ ] upgrade version on supabase also

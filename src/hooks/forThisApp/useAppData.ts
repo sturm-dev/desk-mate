@@ -15,7 +15,7 @@ export const useAppData = ({ user }: { user?: User }) => {
       .from(TABLE_NAME.app_data)
       .select("*")
       .single();
-    console.log(`getAppData - data`, data);
+    // console.log(`getAppData - data`, data);
 
     if (data) set_appData(data);
   };
