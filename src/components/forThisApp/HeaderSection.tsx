@@ -1,7 +1,6 @@
 "use client";
 
 import { MutableRefObject } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { FullScreenHandle } from "react-full-screen";
@@ -14,6 +13,7 @@ import {
   Image_Gear,
 } from "@/assets";
 import { Font_Lato400 } from "@/fonts";
+import { supabaseClient } from "@/db";
 
 import { OptionsDropdown } from "./OptionsDropdown";
 
@@ -27,10 +27,9 @@ export const HeaderSection = ({
   currentDate: Date;
 }) => {
   const router = useRouter();
-  const supabase = createClientComponentClient();
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    await supabaseClient.auth.signOut();
     router.push("/login");
   };
 

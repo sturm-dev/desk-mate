@@ -15,32 +15,15 @@ import {
   useAuthRedirect,
   useGetDateEveryMinute,
   useGetDivDimensions,
-  useDataBy,
   useUser,
+  useAllDataBy,
 } from "@/hooks";
-import {
-  DataByDay_Interface,
-  DataByUser_Interface,
-  DataByWeek_Interface,
-} from "@/db";
 
 export default function Index() {
   const fullScreenHandle = useFullScreenHandle();
   const { authLoading } = useAuthRedirect();
   const { user } = useUser({ authLoading });
-  // ─────────────────────────────────────────────────────────────────────
-  const { data: dataByDay } = useDataBy<DataByDay_Interface>({
-    user,
-    dataBy: "data_by_day",
-  });
-  const { data: dataByUser } = useDataBy<DataByUser_Interface>({
-    user,
-    dataBy: "data_by_user",
-  });
-  const { data: dataByWeek } = useDataBy<DataByWeek_Interface>({
-    user,
-    dataBy: "data_by_week",
-  });
+  const { dataByDay, dataByUser, dataByWeek } = useAllDataBy({ user });
   // ─────────────────────────────────────────────────────────────────────
 
   const { currentDate } = useGetDateEveryMinute();

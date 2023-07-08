@@ -11,8 +11,12 @@
             - [x] goal
             - [x] custom quote
             - [x] do not forget md_text
+            - [ ] 🔥 check subscription to changes not working
+
+                - move all data to zustand ?
+                - when update -> update zustand data
+
             - [ ] daily quote
-            - [ ] check subscription to changes not working
             - [ ] center section with markdown text
 
 - [ ] (hora-feliz) - crear excel y formularios

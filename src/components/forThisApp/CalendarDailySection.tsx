@@ -17,8 +17,6 @@ export const CalendarDailySection = ({
 
   const innerHeight = height - padding * 2;
 
-  console.log(`dimensions`, dimensions);
-
   return (
     <div
       id="calendar_section_div"

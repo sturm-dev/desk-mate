@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+
+import { supabaseClient } from "@/db";
 
 export const useAuthRedirect = () => {
   const [loading, setLoading] = useState(true);
 
   const router = useRouter();
-  const supabase = createClientComponentClient();
 
   const checkUser = useCallback(async () => {
-    const { data } = await supabase.auth.getUser();
+    const { data } = await supabaseClient.auth.getUser();
 
     if (data.user) router.replace("/");
     else router.replace("/login");
@@ -18,7 +18,7 @@ export const useAuthRedirect = () => {
     setTimeout(() => {
       setLoading(false);
     }, 500);
-  }, [router, supabase.auth]);
+  }, [router, supabaseClient.auth]);
 
   useEffect(() => {
     checkUser();

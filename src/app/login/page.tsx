@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import { useAuthRedirect } from "@/hooks";
 import { FullLoading } from "@/components";
+import { supabaseClient } from "@/db";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -13,12 +13,11 @@ export default function Login() {
   const [view, setView] = useState("sign-in");
 
   const router = useRouter();
-  const supabase = createClientComponentClient();
   const { authLoading } = useAuthRedirect();
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await supabase.auth.signUp({
+    await supabaseClient.auth.signUp({
       email,
       password,
       options: {
@@ -30,7 +29,7 @@ export default function Login() {
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await supabase.auth.signInWithPassword({
+    await supabaseClient.auth.signInWithPassword({
       email,
       password,
     });
