@@ -3,6 +3,20 @@
 - [ ] new db organization
     - [x] create tables
     - [ ] link data with new tables
+        - [x] active rls policies
+        - [ ] read content from new tables
+            - [x] daily md_text
+            - [x] daily calendar
+            - [x] weekly md_text
+            - [x] goal
+            - [x] custom quote
+            - [x] do not forget md_text
+            - [ ] daily quote
+            - [ ] check subscription to changes not working
+            - [ ] center section with markdown text
+
+- [ ] (hora-feliz) - crear excel y formularios
+
 - [ ] admin panel
 
 - [ ] on each commit (version upgrade)

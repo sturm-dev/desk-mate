@@ -4,18 +4,28 @@ import {
   createClientComponentClient,
 } from "@supabase/auth-helpers-nextjs";
 
-import { Database } from "@/db";
+import { DB_TABLE, Database, TABLE_FIELD, TABLE_NAME } from "@/db";
 
-export type UserDataInterface = Database["public"]["Tables"]["all_data"]["Row"];
+export const useDataBy = <T>({
+  dataBy,
+  user,
+}: {
+  dataBy: keyof DB_TABLE & `data_by_${string}`;
+  user?: User;
+}): {
+  data?: T;
+} => {
+  // ─────────────────────────────────────────────────────────────────────z
+  type DataByInterface = DB_TABLE[typeof dataBy]["Row"];
+  // ─────────────────────────────────────────────────────────────────────
 
-export const useUserData = ({ authLoading }: { authLoading: boolean }) => {
-  const [user, setUser] = useState<User>();
-  const [userData, setUserData] = useState<UserDataInterface>();
+  const [data, setData] = useState<DataByInterface>();
 
   const supabase = createClientComponentClient<Database>();
 
   // ─────────────────────────────────────────────────────────────────────
 
+  // TODO: check subscription not working
   const subscribeToChanges = () =>
     supabase
       .channel("table-db-changes")
@@ -24,59 +34,41 @@ export const useUserData = ({ authLoading }: { authLoading: boolean }) => {
         {
           event: "*",
           schema: "public",
-          table: "all_data",
-          filter: `email=eq.${user?.email}`,
+          table: TABLE_NAME[dataBy],
+          filter: `${TABLE_FIELD[dataBy].user_email}=eq.${user?.email}`,
         },
         (payload) => {
           // console.log("data updated", payload);
 
-          const newData = payload.new as UserDataInterface;
-          if (payload) setUserData({ ...userData, ...newData });
+          const newData = payload.new as DataByInterface;
+          if (payload) setData({ ...data, ...newData });
         }
       )
       .subscribe();
 
   // ─────────────────────────────────────────────────────────────────────
 
-  const getUser = async () => {
-    if (authLoading) return;
-
-    const { data } = await supabase.auth.getUser();
-    // console.log(`getUser - data.user`, data.user);
-
-    if (data.user) setUser(data.user);
-  };
-
-  useEffect(() => {
-    getUser();
-  }, [authLoading]);
-
-  // ─────────────────────────────────────────────────────────────────────
-
-  const getUserData = async () => {
+  const getData = async () => {
     if (!user) return;
 
     const { data } = await supabase
-      .from("all_data")
+      .from(TABLE_NAME[dataBy])
       .select("*")
-      .eq("email", user?.email)
+      .eq(TABLE_FIELD[dataBy].user_email, user?.email)
       .single();
-    // console.log(`getUserData - data`, data);
+    // console.log(`getDataByUser - data`, data);
 
     if (data) {
-      setUserData(data);
+      setData(data);
       subscribeToChanges();
     }
   };
 
   useEffect(() => {
-    getUserData();
+    getData();
   }, [user]);
 
   // ─────────────────────────────────────────────────────────────────────
 
-  return {
-    user,
-    userData,
-  };
+  return { data: data as T };
 };

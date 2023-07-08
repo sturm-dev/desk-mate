@@ -15,13 +15,33 @@ import {
   useAuthRedirect,
   useGetDateEveryMinute,
   useGetDivDimensions,
-  useUserData,
+  useDataBy,
+  useUser,
 } from "@/hooks";
+import {
+  DataByDay_Interface,
+  DataByUser_Interface,
+  DataByWeek_Interface,
+} from "@/db";
 
 export default function Index() {
   const fullScreenHandle = useFullScreenHandle();
   const { authLoading } = useAuthRedirect();
-  const { user, userData } = useUserData({ authLoading });
+  const { user } = useUser({ authLoading });
+  // ─────────────────────────────────────────────────────────────────────
+  const { data: dataByDay } = useDataBy<DataByDay_Interface>({
+    user,
+    dataBy: "data_by_day",
+  });
+  const { data: dataByUser } = useDataBy<DataByUser_Interface>({
+    user,
+    dataBy: "data_by_user",
+  });
+  const { data: dataByWeek } = useDataBy<DataByWeek_Interface>({
+    user,
+    dataBy: "data_by_week",
+  });
+  // ─────────────────────────────────────────────────────────────────────
 
   const { currentDate } = useGetDateEveryMinute();
 
@@ -53,19 +73,24 @@ export default function Index() {
                 {/* ───────────────────────────────────────────────────── */}
                 <MarkdownSection
                   title={`📅 Today`}
-                  mdText={userData?.daily__md_text}
+                  mdText={dataByDay?.md_text}
                 />
                 <div className="flex flex-col">
                   <MarkdownSection
                     title="📌 Do not forget"
-                    mdText={userData?.not_forget__md_text}
+                    mdText={dataByUser?.do_not_forget__md_text}
                   />
                 </div>
               </div>
-              <CenterSection userData={userData} />
+              <CenterSection
+                customQuote={dataByUser?.custom_quote__md_text}
+                dailyQuote="" // TODO: get from app_data.daily_quote__md_text
+                goal={dataByUser?.goal}
+                week__md_text={dataByWeek?.md_text}
+              />
               <div className="w-1/4">
                 <CalendarDailySection
-                  text={userData?.calendar_text}
+                  text={dataByDay?.calendar_text}
                   height={body_height}
                   currentDate={currentDate}
                 />
