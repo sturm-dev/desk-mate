@@ -17,6 +17,7 @@ import {
   useGetDivDimensions,
   useUser,
   useAllDataBy,
+  useAppData,
 } from "@/hooks";
 
 export default function Index() {
@@ -24,6 +25,7 @@ export default function Index() {
   const { authLoading } = useAuthRedirect();
   const { user } = useUser({ authLoading });
   const { dataByDay, dataByUser, dataByWeek } = useAllDataBy({ user });
+  const { appData } = useAppData({ user });
   // ─────────────────────────────────────────────────────────────────────
 
   const { currentDate } = useGetDateEveryMinute();
@@ -67,7 +69,7 @@ export default function Index() {
               </div>
               <CenterSection
                 customQuote={dataByUser?.custom_quote__md_text}
-                dailyQuote="" // TODO: get from app_data.daily_quote__md_text
+                dailyQuote={appData?.daily_quote__md_text}
                 goal={dataByUser?.goal}
                 week__md_text={dataByWeek?.md_text}
               />
