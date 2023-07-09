@@ -67,9 +67,9 @@ export const useAllDataBy = ({ user }: { user?: User }) => {
   // select=*&user_email=eq.sturmenta%40gmail.com
 
   const subscribeToChanges = () => {
-    if (alreadySubscribed) return;
+    if (alreadySubscribed || !user) return;
 
-    console.log("subscribedToChanges!");
+    console.log("subscribedToChanges! - user email:", user?.email);
     setAlreadySubscribed(true);
     supabaseClient
       .channel("any")
@@ -79,7 +79,7 @@ export const useAllDataBy = ({ user }: { user?: User }) => {
           event: "UPDATE",
           schema: "*",
           table: TABLE_NAME.data_by_day,
-          filter: `${TABLE_FIELD.data_by_day.user_email}=eq.${user?.email}`, // TODO: test with &
+          filter: `${TABLE_FIELD.data_by_day.user_email}=eq.${user?.email}`,
         },
         (payload) => {
           console.log("Change received - data_by_day!", payload);
@@ -129,7 +129,7 @@ export const useAllDataBy = ({ user }: { user?: User }) => {
   };
   useEffect(() => {
     subscribeToChanges();
-  }, []);
+  }, [user]);
 
   // ─────────────────────────────────────────────────────────────────────
 
