@@ -38,8 +38,9 @@ export const useDataBy = <T>({
       ).data;
     } else if (dataBy === "data_by_week") {
       const mondayDate = dayjs()
-        .startOf("week")
-        .add(1, "day")
+        .subtract(1, "day") // week start on monday
+        .startOf("week") // get the sunday of the week
+        .add(1, "day") // transform to monday
         .format("YYYY-MM-DD");
 
       // get data filter with the first monday of the week

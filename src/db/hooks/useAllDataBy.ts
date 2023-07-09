@@ -103,8 +103,9 @@ export const useAllDataBy = ({ user }: { user?: User }) => {
 
           const newData = payload.new as DataByWeek_Interface;
           const mondayDate = dayjs()
-            .startOf("week")
-            .add(1, "day")
+            .subtract(1, "day") // week start on monday
+            .startOf("week") // get the sunday of the week
+            .add(1, "day") // transform to monday
             .format("YYYY-MM-DD");
 
           if (newData.monday_of_week === mondayDate) set_dataByWeek(newData);

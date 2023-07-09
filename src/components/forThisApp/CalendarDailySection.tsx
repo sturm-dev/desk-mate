@@ -88,10 +88,12 @@ const TextComponent = ({
   is30min?: boolean;
 }) => (
   <div
-    className={`border-l border-neutral-700 p-1 ${is30min ? "" : "pl-2"}`}
+    className={`border-l flex items-center border-neutral-700 p-1 ${
+      is30min ? "" : "pl-2"
+    }`}
     style={{ width }}
   >
-    <p className="items-center text-sm overflow-hidden whitespace-nowrap text-ellipsis">
+    <p className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">
       {text}
     </p>
   </div>
