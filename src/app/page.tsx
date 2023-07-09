@@ -15,10 +15,8 @@ import {
   useAuthRedirect,
   useGetDateEveryMinute,
   useGetDivDimensions,
-  useUser,
-  useAllDataBy,
-  useAppData,
 } from "@/hooks";
+import { useAllDataBy, useAppData, useUser } from "@/db";
 
 export default function Index() {
   const fullScreenHandle = useFullScreenHandle();
