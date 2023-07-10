@@ -19,7 +19,7 @@
 
 - [ ] admin panel
 
-- [ ] (hora-feliz) - crear excel y formularios
+- [x] add preview branch
 
 - [ ] on each commit (version upgrade)
     - [ ] upgrade version on supabase also
