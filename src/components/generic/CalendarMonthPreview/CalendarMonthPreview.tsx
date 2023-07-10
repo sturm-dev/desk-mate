@@ -8,7 +8,7 @@ export const CalendarMonthPreview = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   return (
-    <div className="border-l border-t border-neutral-800 pb-2">
+    <div className="flex flex-1 border-l border-t border-neutral-800">
       <Calendar
         onChange={(date) => setCurrentDate(date as Date)}
         value={currentDate}

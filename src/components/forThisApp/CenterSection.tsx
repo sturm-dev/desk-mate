@@ -43,8 +43,12 @@ export const CenterSection = ({
         </div>
       </div>
       <div className="flex flex-row">
-        <MarkdownSection title="🗓️ This week" mdText={week__md_text} />
-        <CalendarMonthPreview />
+        <div className="flex flex-1">
+          <MarkdownSection title="🗓️ This week" mdText={week__md_text} />
+        </div>
+        <div className="flex flex-1">
+          <CalendarMonthPreview />
+        </div>
       </div>
     </div>
   );
