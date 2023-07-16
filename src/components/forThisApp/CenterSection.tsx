@@ -1,5 +1,5 @@
 import { C_ReactMarkdown, CalendarMonthPreview } from "../generic";
-import { MarkdownSection } from "./MarkdownSection";
+import { CheckBoxList_Section } from "./CheckBoxList_Section";
 
 export const CenterSection = ({
   goal,
@@ -30,7 +30,7 @@ export const CenterSection = ({
       </div>
       <div className="flex flex-row">
         <div className="flex flex-1">
-          <MarkdownSection title="🗓️ This week" mdText={week__md_text} />
+          <CheckBoxList_Section title="🗓️ This week" mdText={week__md_text} />
         </div>
         <div className="flex flex-1">
           <CalendarMonthPreview />

@@ -6,7 +6,7 @@ import {
   HeaderSection,
   CalendarDailySection,
   FullLoading,
-  MarkdownSection,
+  CheckBoxList_Section,
   BgAnimatedGradient,
   YoutubeBgPlayer,
   CenterSection,
@@ -54,12 +54,12 @@ export default function Index() {
             <div className="flex flex-1 flex-row">
               <div className="flex w-1/4 flex-col" style={{ marginTop: -1 }}>
                 {/* ───────────────────────────────────────────────────── */}
-                <MarkdownSection
+                <CheckBoxList_Section
                   title={`📅 Today`}
                   mdText={dataByDay?.md_text}
                 />
                 <div className="flex flex-col">
-                  <MarkdownSection
+                  <CheckBoxList_Section
                     title="📌 Do not forget"
                     mdText={dataByUser?.do_not_forget__md_text}
                   />
