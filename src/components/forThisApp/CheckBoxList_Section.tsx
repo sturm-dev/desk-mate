@@ -6,7 +6,9 @@ const separatorMdText = "---";
 const checkboxChecked = "- [x]";
 const checkboxUnchecked = "- [ ]";
 
-export const MarkdownSection = ({
+// NOTE: this component not handle all markdown text - only checkbox and separator
+
+export const CheckBoxList_Section = ({
   mdText,
   title,
 }: {
