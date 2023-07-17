@@ -12,21 +12,12 @@ export const CenterSection = ({
   dailyQuote?: string | null | undefined;
   week__md_text?: string | null | undefined;
 }) => {
-  const _customQuote = `
-  # Get your freedom
-  ---
-  - Create minimal version
-  - Get 200 users @ 5$ / month
-  `;
-
   return (
     <div className="flex flex-1 border-r border-l border-neutral-800 flex-col">
       <div className="p-2 text-sm">🎯 Goal: {goal}</div>
       <Line />
       <div className="flex flex-1 flex-col p-8 pt-2 pb-6 items-center justify-center">
-        <C_ReactMarkdown
-          text={_customQuote || customQuote || dailyQuote || ""}
-        />
+        <C_ReactMarkdown text={customQuote || dailyQuote || ""} />
       </div>
       <div className="flex flex-row">
         <div className="flex flex-1">
