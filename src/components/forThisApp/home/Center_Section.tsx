@@ -1,7 +1,7 @@
-import { C_ReactMarkdown, CalendarMonthPreview } from "../generic";
+import { C_ReactMarkdown, CalendarMonthPreview } from "../../generic";
 import { CheckBoxList_Section } from "./CheckBoxList_Section";
 
-export const CenterSection = ({
+export const Center_Section = ({
   goal,
   customQuote,
   dailyQuote,

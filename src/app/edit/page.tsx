@@ -1,16 +1,21 @@
 "use client";
 
 import { FullLoading } from "@/components";
-import { useAuthRedirect } from "@/hooks";
+import { Header_Section } from "@/components/forThisApp/edit";
+import { useUser } from "@/db";
+import { useAuthRedirect, useGetDateEveryMinute } from "@/hooks";
 
 export default function Edit() {
   const { authLoading } = useAuthRedirect();
+  const { user } = useUser({ authLoading });
 
-  if (authLoading) return <FullLoading />;
+  const { currentDate } = useGetDateEveryMinute();
+
+  if (authLoading || !user) return <FullLoading />;
 
   return (
-    <div>
-      <p>Edit</p>
+    <div className="w-full">
+      <Header_Section user={user} currentDate={currentDate} />
     </div>
   );
 }
