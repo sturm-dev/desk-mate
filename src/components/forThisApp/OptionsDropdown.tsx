@@ -3,14 +3,17 @@ import { Fragment } from "react";
 import {
   ArrowLeftOnRectangleIcon,
   UserCircleIcon,
+  PencilSquareIcon,
 } from "@heroicons/react/24/outline";
 
 export const OptionsDropdown = ({
   children,
   onLogout = () => {},
+  onGoToEdit = () => {},
 }: {
   children: React.ReactNode;
   onLogout: () => void;
+  onGoToEdit: () => void;
 }) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -30,6 +33,17 @@ export const OptionsDropdown = ({
           <div className="p-4 flex flex-row items-center pr-6">
             <UserCircleIcon className="ml-2 mr-2 h-6 w-6 text-neutral-500" />
             <span className="text-neutral-500">sturmenta@gmail.com</span>
+          </div>
+          <div className="hidden xl:block">
+            <Menu.Item>
+              <button
+                className="flex flex-row p-4 pr-6 items-center w-full"
+                onClick={onGoToEdit}
+              >
+                <PencilSquareIcon className="ml-2 h-6 w-6 mr-2" />
+                <span>Edit fields</span>
+              </button>
+            </Menu.Item>
           </div>
           <Menu.Item>
             <button

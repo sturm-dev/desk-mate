@@ -33,6 +33,8 @@ export const HeaderSection = ({
     router.push("/login");
   };
 
+  const onGoToEdit = () => router.push("/edit");
+
   const onSwitchFullScreenMode = () => {
     if (fullScreenHandle.active) fullScreenHandle.exit();
     else fullScreenHandle.enter();
@@ -77,7 +79,7 @@ export const HeaderSection = ({
             height={20}
           />
         </button>
-        <OptionsDropdown onLogout={signOut}>
+        <OptionsDropdown onLogout={signOut} onGoToEdit={onGoToEdit}>
           <div className="px-2">
             <Image alt="settings" src={Image_Gear} width={26} height={26} />
           </div>
