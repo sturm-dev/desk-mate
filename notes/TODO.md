@@ -12,6 +12,7 @@
 
 ## todo-later
 
+- [ ] can check/uncheck boxes from touch in preview mode
 
 - [ ] ? tasks not completed see the next day
 - [ ] fullScreen icon-images to svg
@@ -34,3 +35,5 @@
 ## ideas
 
 - on each hour - make animation with numbers to show to user what hour is
+
+- in calendar show older text in gray

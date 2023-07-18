@@ -1,9 +1,6 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { UserCircleIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-
-import { Image_Gear } from "@/assets";
+import { UserCircleIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
 
 export const OptionsDropdown = ({
   userEmail,
@@ -21,10 +18,8 @@ export const OptionsDropdown = ({
 }) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
-      <Menu.Button className="inline-flex w-full justify-center rounded-md px-1 py-2">
-        <div className="px-2">
-          <Image alt="settings" src={Image_Gear} width={26} height={26} />
-        </div>
+      <Menu.Button className="inline-flex w-full justify-center rounded-md py-2">
+        <Cog6ToothIcon className="ml-2 h-6 w-6 mr-2 text-neutral-500" />
       </Menu.Button>
       <Transition
         as={Fragment}
