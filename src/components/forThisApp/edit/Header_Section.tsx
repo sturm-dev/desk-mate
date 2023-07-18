@@ -15,7 +15,7 @@ import {
 import dayjs from "dayjs";
 
 import { supabaseClient } from "@/db";
-import { BoldText, OptionsDropdown } from "@/components/generic";
+import { BoldText, OptionsDropdown, Touchable } from "@/components/generic";
 
 export const Header_Section = ({
   user,
@@ -58,32 +58,25 @@ export const Header_Section = ({
             <ChevronDoubleRightIcon className={IconStyleClassNames} />
           </Touchable>
         </div>
-        <OptionsDropdown
-          userEmail={user.email!}
-          items={[
-            {
-              title: "Logout",
-              onClick: signOut,
-              icon: ArrowLeftOnRectangleIcon,
-            },
-          ]}
-          footerComponent={<AppVersion />}
-        />
+        <Touchable>
+          <OptionsDropdown
+            userEmail={user.email!}
+            items={[
+              {
+                title: "Logout",
+                onClick: signOut,
+                icon: ArrowLeftOnRectangleIcon,
+              },
+            ]}
+            footerComponent={<AppVersion />}
+          />
+        </Touchable>
       </div>
     </div>
   );
 };
 
 const IconStyleClassNames = "ml-2 h-6 w-6 mr-2";
-
-// TODO: add onHover and touchable opacity effect
-const Touchable = ({
-  children,
-  onClick,
-}: {
-  children: React.ReactNode;
-  onClick?: () => void;
-}) => <div onClick={onClick}>{children}</div>;
 
 const AppVersion = () => (
   <div className="flex flex-row p-2 py-4 items-center justify-center">
