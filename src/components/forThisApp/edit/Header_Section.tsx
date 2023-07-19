@@ -1,6 +1,6 @@
 "use client";
 
-import { MutableRefObject } from "react";
+import { MutableRefObject, useState } from "react";
 import { useRouter } from "next/navigation";
 import packageJson from "~/package.json";
 import { User } from "@supabase/auth-helpers-nextjs";
@@ -17,6 +17,13 @@ import dayjs from "dayjs";
 import { supabaseClient } from "@/db";
 import { BoldText, OptionsDropdown, Touchable } from "@/components/generic";
 
+// TODO:
+// - [x] set selected date with chevron icons
+//  - [x] move day
+//  - [x] move week
+// - [ ] open calendar in modal with calendar icon
+//  - [ ] select date in calendar and set selected date
+
 export const Header_Section = ({
   user,
   ref_div,
@@ -28,33 +35,45 @@ export const Header_Section = ({
 }) => {
   const router = useRouter();
 
+  const [selectedDate, setSelectedDate] = useState(currentDate);
+
   const signOut = async () => {
     await supabaseClient.auth.signOut();
     router.push("/login");
   };
 
+  const dateEdit = (editType: "plus" | "minus", dateType: "day" | "week") => {
+    let newDate = dayjs(selectedDate);
+    if (editType === "plus") newDate = newDate.add(1, dateType);
+    else newDate = newDate.subtract(1, dateType);
+
+    setSelectedDate(newDate.toDate());
+
+    // TODO: after 3 seconds of no change date -> ask to db to data about that day
+  };
+
   return (
     <div ref={ref_div} className="border-b border-neutral-800">
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center px-1">
         <Touchable>
           <CalendarDaysIcon className={IconStyleClassNames} />
         </Touchable>
         <div className="flex-1 items-center justify-center flex flex-row">
-          <Touchable>
+          <Touchable onClick={() => dateEdit("minus", "week")}>
             <ChevronDoubleLeftIcon className={IconStyleClassNames} />
           </Touchable>
-          <Touchable>
+          <Touchable onClick={() => dateEdit("minus", "day")}>
             <ChevronLeftIcon className={IconStyleClassNames} />
           </Touchable>
           <Touchable>
-            <p className="text-sm p-1 px-3 m-1 text-center bg-cyan-600 rounded-sm">
-              {dayjs(currentDate).format("dddd D of MMMM")}
+            <p className="w-60 text-sm p-1 px-3 m-1 text-center bg-cyan-600 rounded-sm">
+              {dayjs(selectedDate).format("dddd D of MMMM")}
             </p>
           </Touchable>
-          <Touchable>
+          <Touchable onClick={() => dateEdit("plus", "day")}>
             <ChevronRightIcon className={IconStyleClassNames} />
           </Touchable>
-          <Touchable>
+          <Touchable onClick={() => dateEdit("plus", "week")}>
             <ChevronDoubleRightIcon className={IconStyleClassNames} />
           </Touchable>
         </div>
