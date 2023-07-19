@@ -54,21 +54,27 @@ export const Header_Section = ({
         </Touchable>
         <div className="flex-1 items-center justify-center flex flex-row">
           <Touchable onClick={() => dateEdit("minus", "week")}>
-            <ChevronDoubleLeftIcon className={IconStyleClassNames} />
+            <ChevronDoubleLeftIcon
+              color="gray"
+              className={IconStyleClassNames}
+            />
           </Touchable>
           <Touchable onClick={() => dateEdit("minus", "day")}>
-            <ChevronLeftIcon className={IconStyleClassNames} />
+            <ChevronLeftIcon color="gray" className={IconStyleClassNames} />
           </Touchable>
           <Touchable>
-            <p className="w-60 text-sm p-1 px-3 m-1 text-center bg-cyan-600 rounded-sm">
+            <p className="w-60 text-sm p-1 px-3 m-3 text-center bg-cyan-600 rounded-sm">
               {dayjs(selectedDate).format("dddd D of MMMM")}
             </p>
           </Touchable>
           <Touchable onClick={() => dateEdit("plus", "day")}>
-            <ChevronRightIcon className={IconStyleClassNames} />
+            <ChevronRightIcon color="gray" className={IconStyleClassNames} />
           </Touchable>
           <Touchable onClick={() => dateEdit("plus", "week")}>
-            <ChevronDoubleRightIcon className={IconStyleClassNames} />
+            <ChevronDoubleRightIcon
+              color="gray"
+              className={IconStyleClassNames}
+            />
           </Touchable>
         </div>
         <Touchable>

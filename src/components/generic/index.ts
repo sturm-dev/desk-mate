@@ -6,3 +6,4 @@ export * from "./C_ReactMarkdown";
 export * from "./OptionsDropdown";
 export * from "./BoldText";
 export * from "./Touchable";
+export * from "./Card";
