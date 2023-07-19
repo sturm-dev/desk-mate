@@ -17,13 +17,6 @@ import dayjs from "dayjs";
 import { supabaseClient } from "@/db";
 import { BoldText, OptionsDropdown, Touchable } from "@/components/generic";
 
-// TODO:
-// - [x] set selected date with chevron icons
-//  - [x] move day
-//  - [x] move week
-// - [ ] open calendar in modal with calendar icon
-//  - [ ] select date in calendar and set selected date
-
 export const Header_Section = ({
   user,
   ref_div,
@@ -55,7 +48,8 @@ export const Header_Section = ({
   return (
     <div ref={ref_div} className="border-b border-neutral-800">
       <div className="flex items-center justify-center px-1">
-        <Touchable>
+        {/* TODO: later implement the calendar selection */}
+        <Touchable style={{ opacity: 0 }}>
           <CalendarDaysIcon className={IconStyleClassNames} />
         </Touchable>
         <div className="flex-1 items-center justify-center flex flex-row">
