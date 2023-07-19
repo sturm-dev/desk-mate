@@ -77,19 +77,17 @@ export const Header_Section = ({
             />
           </Touchable>
         </div>
-        <Touchable>
-          <OptionsDropdown
-            userEmail={user.email!}
-            items={[
-              {
-                title: "Logout",
-                onClick: signOut,
-                icon: ArrowLeftOnRectangleIcon,
-              },
-            ]}
-            footerComponent={<AppVersion />}
-          />
-        </Touchable>
+        <OptionsDropdown
+          userEmail={user.email!}
+          items={[
+            {
+              title: "Logout",
+              onClick: signOut,
+              icon: ArrowLeftOnRectangleIcon,
+            },
+          ]}
+          footerComponent={<AppVersion />}
+        />
       </div>
     </div>
   );
