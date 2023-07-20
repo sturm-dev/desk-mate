@@ -8,7 +8,7 @@ export const Touchable = ({
   className,
   ...props
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onClick?: () => void;
   className?: DivProps["className"];
 } & DivProps) => {
