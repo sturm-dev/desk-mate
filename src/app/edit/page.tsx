@@ -1,6 +1,6 @@
 "use client";
 
-import { FullLoading } from "@/components";
+import { BgAnimatedGradient, FullLoading } from "@/components";
 import {
   Header_Section,
   Left_Section,
@@ -18,12 +18,14 @@ export default function Edit() {
   if (authLoading || !user) return <FullLoading />;
 
   return (
-    <div className="w-full flex flex-1 flex-col">
-      <Header_Section user={user} currentDate={currentDate} />
-      <div className="flex flex-1">
-        <Left_Section />
-        <Right_Section />
+    <BgAnimatedGradient>
+      <div className="w-full flex flex-1 flex-col">
+        <Header_Section user={user} currentDate={currentDate} />
+        <div className="flex flex-1">
+          <Left_Section />
+          <Right_Section />
+        </div>
       </div>
-    </div>
+    </BgAnimatedGradient>
   );
 }
