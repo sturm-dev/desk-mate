@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.1.43",
+  "version": "0.1.44",
   "scripts": {
     "dev": "yarn supabase:gen-types && yarn tsc && next dev",
     "build": "next build",

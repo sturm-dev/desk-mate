@@ -6,7 +6,7 @@ const height = 600 * 0.2;
 export const SectionsArray = [
   "checkbox-list--today",
   "checkbox-list--do-not-forget",
-  "checkbox-list--week",
+  "checkbox-list--this-week",
   "goal",
   "billboard",
   "today-hours",
@@ -15,7 +15,7 @@ export const SectionsArray = [
 export const SectionsArrayReadableName = [
   `Checkbox list\n Today`,
   `Checkbox list\n Do not forget`,
-  `Checkbox list\n Week`,
+  `Checkbox list\n This week`,
   "Goal",
   "Billboard",
   "Today hours",
@@ -76,9 +76,11 @@ export const HomeMiniLayout = ({
           />
           <div className="flex" style={{ height: "30%" }}>
             <Touchable
-              onClick={() => setSectionSelected("checkbox-list--week")}
+              onClick={() => setSectionSelected("checkbox-list--this-week")}
               className={`border-r border-neutral-500 ${
-                sectionSelected === "checkbox-list--week" ? "bg-cyan-600" : ""
+                sectionSelected === "checkbox-list--this-week"
+                  ? "bg-cyan-600"
+                  : ""
               }`}
               style={{ width: "50%" }}
             />
