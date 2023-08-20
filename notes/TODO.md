@@ -1,38 +1,20 @@
 ## todo-now
 
-- [x] new db organization
-    - [x] create tables
-    - [x] link data with new tables
-        - [x] active rls policies
-        - [x] read content from new tables
-            - [x] daily md_text
-            - [x] daily calendar
-            - [x] weekly md_text
-            - [x] goal
-            - [x] custom quote
-            - [x] do not forget md_text
-            - [x] check subscription to changes not working
-            - [x] daily quote
-            - [x] center section with markdown text
-            - [x] get the data only by day or week
-            - [x] check subscription multiple filters (not working)
-
 - [ ] admin panel
-
-- [x] add preview branch
 
 - [ ] on each commit (version upgrade)
     - [ ] upgrade version on supabase also
     - [ ] and app when check a new version show a button to update
 
+- [ ] socket channel only open when user is editing
+
 ---
 
 ## todo-later
 
-- [ ] good admin panel to edit fields
-    - [ ] data save in the db only for specific days (after the day passes -> calendar not show that data)
-    - [ ] can add some task for specific day
-    - [ ] tasks not completed see the next day
+- [ ] can check/uncheck boxes from touch in preview mode
+
+- [ ] ? tasks not completed see the next day
 - [ ] fullScreen icon-images to svg
 
 - [ ] sturm.dev webpage to get bank account for LLC
@@ -53,3 +35,5 @@
 ## ideas
 
 - on each hour - make animation with numbers to show to user what hour is
+
+- in calendar show older text in gray

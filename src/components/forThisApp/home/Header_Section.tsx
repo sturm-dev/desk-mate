@@ -6,22 +6,23 @@ import Image from "next/image";
 import { FullScreenHandle } from "react-full-screen";
 import dayjs from "dayjs";
 import packageJson from "~/package.json";
-
+import { User } from "@supabase/auth-helpers-nextjs";
 import {
-  Image_EnterFullScreen,
-  Image_ExitFullScreen,
-  Image_Gear,
-} from "@/assets";
-import { Font_Lato400 } from "@/fonts";
+  ArrowLeftOnRectangleIcon,
+  PencilSquareIcon,
+} from "@heroicons/react/24/outline";
+
+import { Image_EnterFullScreen, Image_ExitFullScreen } from "@/assets";
 import { supabaseClient } from "@/db";
+import { BoldText, OptionsDropdown } from "@/components";
 
-import { OptionsDropdown } from "./OptionsDropdown";
-
-export const HeaderSection = ({
+export const Header_Section = ({
+  user,
   fullScreenHandle,
   ref_div,
   currentDate,
 }: {
+  user: User;
   fullScreenHandle: FullScreenHandle;
   ref_div?: MutableRefObject<HTMLDivElement | null>;
   currentDate: Date;
@@ -44,12 +45,9 @@ export const HeaderSection = ({
     <div ref={ref_div} className="border-b border-neutral-800">
       <div className="flex items-center justify-center">
         <div className="pl-2 flex items-center justify-center">
-          <span
-            className="text-2xl p-2"
-            style={{ fontFamily: Font_Lato400.style.fontFamily }}
-          >
+          <BoldText className="text-2xl p-2">
             {dayjs(currentDate).format("HH:mm")}
-          </span>
+          </BoldText>
           -
           <span className="text-sm p-2">
             {dayjs(currentDate).format("dddd D of MMMM")}
@@ -59,12 +57,10 @@ export const HeaderSection = ({
         <div className="pr-2">
           <span className="text-2xl">🐒</span>
         </div>
-        <div className="pr-1" onClick={() => router.refresh()}>
+        <div className="pr-1">
           <span className="text-sm text-neutral-500">
             desk-mate{" - "}
-            <span style={{ fontFamily: Font_Lato400.style.fontFamily }}>
-              v{packageJson.version}
-            </span>
+            <BoldText>v{packageJson.version}</BoldText>
           </span>
         </div>
         <button className="p-2 pr-1" onClick={onSwitchFullScreenMode}>
@@ -79,11 +75,22 @@ export const HeaderSection = ({
             height={20}
           />
         </button>
-        <OptionsDropdown onLogout={signOut} onGoToEdit={onGoToEdit}>
-          <div className="px-2">
-            <Image alt="settings" src={Image_Gear} width={26} height={26} />
-          </div>
-        </OptionsDropdown>
+        <OptionsDropdown
+          userEmail={user.email!}
+          items={[
+            {
+              title: "Edit fields",
+              onClick: onGoToEdit,
+              icon: PencilSquareIcon,
+              showOnlyOnDesktop: true,
+            },
+            {
+              title: "Logout",
+              onClick: signOut,
+              icon: ArrowLeftOnRectangleIcon,
+            },
+          ]}
+        />
       </div>
     </div>
   );
