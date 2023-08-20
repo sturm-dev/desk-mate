@@ -4,7 +4,7 @@ import { useGetDivDimensions } from "@/hooks";
 const padding = 8;
 const hourWidth = 40;
 
-export const CalendarDailySection = ({
+export const CalendarDaily_Section = ({
   text,
   height,
   currentDate,

@@ -1,24 +1,25 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import {
-  ArrowLeftOnRectangleIcon,
-  UserCircleIcon,
-  PencilSquareIcon,
-} from "@heroicons/react/24/outline";
+import { UserCircleIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
 
 export const OptionsDropdown = ({
-  children,
-  onLogout = () => {},
-  onGoToEdit = () => {},
+  userEmail,
+  items,
+  footerComponent,
 }: {
-  children: React.ReactNode;
-  onLogout: () => void;
-  onGoToEdit: () => void;
+  userEmail: string;
+  items: {
+    title: string;
+    onClick: () => void;
+    icon: typeof UserCircleIcon;
+    showOnlyOnDesktop?: boolean;
+  }[];
+  footerComponent?: React.ReactNode;
 }) => {
   return (
     <Menu as="div" className="relative inline-block text-left">
-      <Menu.Button className="inline-flex w-full justify-center rounded-md px-1 py-2">
-        {children}
+      <Menu.Button className="inline-flex w-full justify-center rounded-md py-2">
+        <Cog6ToothIcon className="ml-2 h-6 w-6 mr-2 text-neutral-500" />
       </Menu.Button>
       <Transition
         as={Fragment}
@@ -32,28 +33,28 @@ export const OptionsDropdown = ({
         <Menu.Items className="absolute z-10 right-2 mt-2 origin-top-right divide-y divide-neutral-700 rounded-md bg-neutral-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="p-4 flex flex-row items-center pr-6">
             <UserCircleIcon className="ml-2 mr-2 h-6 w-6 text-neutral-500" />
-            <span className="text-neutral-500">sturmenta@gmail.com</span>
+            <span className="text-neutral-500">{userEmail}</span>
           </div>
-          <div className="hidden xl:block">
-            <Menu.Item>
-              <button
-                className="flex flex-row p-4 pr-6 items-center w-full"
-                onClick={onGoToEdit}
+          {items.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.title}
+                className={item.showOnlyOnDesktop ? "hidden xl:block" : ""}
               >
-                <PencilSquareIcon className="ml-2 h-6 w-6 mr-2" />
-                <span>Edit fields</span>
-              </button>
-            </Menu.Item>
-          </div>
-          <Menu.Item>
-            <button
-              className="flex flex-row p-4 pr-6 items-center w-full"
-              onClick={onLogout}
-            >
-              <ArrowLeftOnRectangleIcon className="ml-2 h-6 w-6 mr-2" />
-              <span>Logout</span>
-            </button>
-          </Menu.Item>
+                <Menu.Item>
+                  <button
+                    className="flex flex-row p-4 pr-6 items-center w-full"
+                    onClick={item.onClick}
+                  >
+                    <Icon className="ml-2 h-6 w-6 mr-2" />
+                    <span>{item.title}</span>
+                  </button>
+                </Menu.Item>
+              </div>
+            );
+          })}
+          {footerComponent}
         </Menu.Items>
       </Transition>
     </Menu>
