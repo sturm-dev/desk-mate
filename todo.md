@@ -4,7 +4,6 @@
 - [ ] preview of the checkbox items
 - [ ] preview of the hours
 - [ ] add toast of success when saved changes
-- [ ] check auto update version with husky not working
 
 ---
 

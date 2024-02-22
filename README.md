@@ -20,3 +20,5 @@ for today hours use the format:
 05:00 = wake up
 13:30 = lunch
 ```
+
+<!-- RUN `pnpm prepare` to initialize husky when project just cloned -->
