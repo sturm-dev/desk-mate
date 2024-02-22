@@ -26,16 +26,12 @@ export const Left_Section = ({
   currentSectionText: string
   setCurrentSectionText: (value: string) => void
 }) => {
-  console.log(`dayOfTheYear`, dayOfTheYear)
-
   const { dimensions: dimensions_fieldToEdit, div_ref: ref_fieldToEdit } =
     useGetDivDimensions()
 
   // ─────────────────────────────────────────────────────────────────────
 
   useEffect(() => {
-    console.log(`useEffect - dayOfTheYear`, dayOfTheYear)
-
     setCurrentSectionText(
       localStorageSections.getText(dayOfTheYear, sectionSelected)
     )

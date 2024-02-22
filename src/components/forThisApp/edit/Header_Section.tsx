@@ -35,7 +35,7 @@ export const Header_Section = ({
     setSelectedDayOfTheYear(newDate.format("DD/MM/YYYY"))
   }
 
-  const onGoToHome = () => router.replace("/")
+  const onGoToHome = () => router.back()
 
   const goBackComponent = ({ hide }: { hide?: boolean }) => (
     <div className={`${hide ? "opacity-0" : ""}`}>
