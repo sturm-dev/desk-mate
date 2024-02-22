@@ -1,6 +1,3 @@
-// TODO: later implement select the day from calendar-picker
-// TODO: later allow to save data in another days
-
 "use client"
 
 import {
