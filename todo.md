@@ -1,7 +1,5 @@
 # now
 
-- [ ] add placeholder to edit sections with correct format
-
 ---
 
 # later

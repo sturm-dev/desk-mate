@@ -81,6 +81,23 @@ export const Left_Section = ({
     }
   }
 
+  const getPlaceholder = (section: SectionInterface) => {
+    switch (section) {
+      case SectionsArray[0]:
+      case SectionsArray[1]:
+      case SectionsArray[2]:
+        return "- [  ] buy some bread\n- [x] make the bed\n---\n- [  ] go to gym"
+      case SectionsArray[3]:
+        return "$10k / month"
+      case SectionsArray[4]:
+        return "# big text\n~strikeout~\n**bold**\n_italic_\n`code`\n(all markdown format works here)"
+      case SectionsArray[5]:
+        return "05:00 = wake up\n13:30 = lunch\n22:00 = sleep"
+      default:
+        return "Write here the note for this section"
+    }
+  }
+
   const saveEdits = () => {
     localStorageSections.setText(
       dayOfTheYear,
@@ -127,6 +144,7 @@ export const Left_Section = ({
             onChange={(e) => setCurrentSectionText(e.target.value)}
             className="h-full w-full rounded-md bg-white bg-opacity-20 p-4"
             style={{ height: dimensions_fieldToEdit.height }}
+            placeholder={getPlaceholder(sectionSelected)}
           />
         </div>
       </Card>
