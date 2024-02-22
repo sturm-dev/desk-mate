@@ -13,6 +13,25 @@ export const CalendarDaily_Section = ({
   height: number
   currentDate: Date
 }) => {
+  return (
+    <DailyHours text={text || ""} height={height}>
+      <AbsoluteRedLine currentDate={currentDate} height={height} />
+    </DailyHours>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
+// used also in edit-preview
+export const DailyHours = ({
+  text,
+  children,
+  height
+}: {
+  text: string
+  children?: React.ReactNode
+  height: number
+}) => {
   const { dimensions, div_ref } = useGetDivDimensions()
 
   const innerHeight = height - padding * 2
@@ -58,21 +77,35 @@ export const CalendarDaily_Section = ({
           </div>
         )
       })}
-      <div className="absolute left-0 top-0 h-full w-full py-2">
-        <div className="h-full w-full">
-          <div
-            className="absolute -ml-2 flex w-full flex-row items-center"
-            style={{ top: getHourLinePosition({ innerHeight, currentDate }) }}>
-            <div className="h-4 w-4 rounded-lg bg-red-500" />
-            <div className="w-full border-b border-red-500" />
-          </div>
-        </div>
-      </div>
+      {children}
     </div>
   )
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+
+const AbsoluteRedLine = ({
+  currentDate,
+  height
+}: {
+  currentDate: Date
+  height: number
+}) => {
+  const innerHeight = height - padding * 2
+
+  return (
+    <div className="absolute left-0 top-0 h-full w-full py-2">
+      <div className="h-full w-full">
+        <div
+          className="absolute -ml-2 flex w-full flex-row items-center"
+          style={{ top: getHourLinePosition({ innerHeight, currentDate }) }}>
+          <div className="h-4 w-4 rounded-lg bg-red-500" />
+          <div className="w-full border-b border-red-500" />
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const TextComponent = ({
   text,

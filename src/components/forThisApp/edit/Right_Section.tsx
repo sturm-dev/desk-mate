@@ -1,7 +1,8 @@
 import { C_ReactMarkdown, Card } from "@/components/generic"
 import { SectionInterface } from "@/constants"
+import { useGetDivDimensions } from "@/hooks"
 
-import { CheckBoxList_Section } from "../home"
+import { CheckBoxList_Section, DailyHours } from "../home"
 
 export const Right_Section = ({
   currentSectionText,
@@ -10,6 +11,8 @@ export const Right_Section = ({
   currentSectionText: string
   sectionSelected: SectionInterface
 }) => {
+  const { dimensions, div_ref } = useGetDivDimensions()
+
   const parseTextDependsOnSection = () => {
     switch (sectionSelected) {
       case "checkbox-list--today":
@@ -21,7 +24,16 @@ export const Right_Section = ({
       case "billboard":
         return <C_ReactMarkdown text={currentSectionText} />
       case "today-hours":
-        return <p>{currentSectionText}</p>
+        return (
+          <div ref={div_ref} className="flex h-full flex-1">
+            <div style={{ height: dimensions.height }}>
+              <DailyHours
+                text={currentSectionText}
+                height={dimensions.height}
+              />
+            </div>
+          </div>
+        )
     }
   }
 
