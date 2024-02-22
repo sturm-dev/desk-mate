@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.2.1",
+  "version": "0.2.2",
   "scripts": {
     "dev": "yarn tsc && next dev",
     "build": "next build",
@@ -10,7 +10,7 @@
     "upgrade-patch-version": "npm version patch --force --no-git-tag-version && git add package.json",
     "post-commit": "git push",
     "---------------------------------": "----------------------------",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
@@ -40,7 +40,7 @@
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "encoding": "^0.1.13",
-    "husky": "^8.0.0",
+    "husky": "^9.0.11",
     "prettier-plugin-tailwindcss": "^0.5.11"
   }
 }
