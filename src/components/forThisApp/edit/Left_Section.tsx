@@ -1,6 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
 import { useEffect } from "react"
-import { useLocalStorage } from "usehooks-ts"
 
 import { Card, Touchable } from "@/components/generic"
 import {
@@ -9,6 +8,7 @@ import {
   SectionsArrayReadableName
 } from "@/constants"
 import { useGetDivDimensions } from "@/hooks"
+import { useLocalStorageSections } from "@/hooks/forThisApp"
 
 import { HomeMiniLayout } from "../HomeMiniLayout"
 
@@ -25,18 +25,21 @@ export const Left_Section = ({
   currentSectionText: string
   setCurrentSectionText: (value: string) => void
 }) => {
-  const [billboardText, setBillboardText] = useLocalStorage(
-    `${dayOfTheYear}-${SectionsArray[4]}`,
-    ""
-  )
+  const {
+    getCurrentSectionTextFromLocalStorage,
+    setCurrentSectionTextToLocalStorage
+  } = useLocalStorageSections({ dayOfTheYear })
+
   const { dimensions: dimensions_fieldToEdit, div_ref: ref_fieldToEdit } =
     useGetDivDimensions()
 
   // ─────────────────────────────────────────────────────────────────────
 
   useEffect(() => {
-    setCurrentSectionText(billboardText)
-  }, [])
+    setCurrentSectionText(
+      getCurrentSectionTextFromLocalStorage(sectionSelected)
+    )
+  }, [sectionSelected])
 
   // ─────────────────────────────────────────────────────────────────────
 
@@ -69,7 +72,7 @@ export const Left_Section = ({
   }
 
   const saveEdits = () => {
-    setBillboardText(currentSectionText)
+    setCurrentSectionTextToLocalStorage(sectionSelected, currentSectionText)
     console.log("Saved!")
     // TODO: show a toast
   }

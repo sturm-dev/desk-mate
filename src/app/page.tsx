@@ -1,7 +1,6 @@
 "use client"
 
 import { FullScreen, useFullScreenHandle } from "react-full-screen"
-import { useLocalStorage } from "usehooks-ts"
 
 import {
   BgAnimatedGradient
@@ -13,18 +12,17 @@ import {
   CheckBoxList_Section,
   Header_Section
 } from "@/components/forThisApp/home"
-import { SectionsArray } from "@/constants"
 import { useGetDateEveryMinute, useGetDivDimensions } from "@/hooks"
+import { useLocalStorageSections } from "@/hooks/forThisApp"
 
 export default function Index() {
   const fullScreenHandle = useFullScreenHandle()
   // ─────────────────────────────────────────────────────────────────────
 
   const { currentDate, dayOfTheYear } = useGetDateEveryMinute()
-  const [billboardText] = useLocalStorage(
-    `${dayOfTheYear}-${SectionsArray[4]}`,
-    ""
-  )
+  const { getCurrentSectionTextFromLocalStorage } = useLocalStorageSections({
+    dayOfTheYear
+  })
 
   // ─────────────────────────────────────────────────────────────────────
   const { dimensions: dimensions_divFather, div_ref: ref_divFather } =
@@ -50,20 +48,31 @@ export default function Index() {
             <div className="flex flex-1 flex-row">
               <div className="flex w-1/4 flex-col" style={{ marginTop: -1 }}>
                 {/* ───────────────────────────────────────────────────── */}
-                <CheckBoxList_Section title={`📅 Today`} mdText={``} />
+                <CheckBoxList_Section
+                  title={`📅 Today`}
+                  mdText={getCurrentSectionTextFromLocalStorage(
+                    "checkbox-list--today"
+                  )}
+                />
                 <div className="flex flex-col">
-                  <CheckBoxList_Section title="📌 Do not forget" mdText={``} />
+                  <CheckBoxList_Section
+                    title="📌 Do not forget"
+                    mdText={getCurrentSectionTextFromLocalStorage(
+                      "checkbox-list--do-not-forget"
+                    )}
+                  />
                 </div>
               </div>
               <Center_Section
-                customQuote={billboardText}
-                dailyQuote={""}
-                goal={""}
-                week__md_text={""}
+                customQuote={getCurrentSectionTextFromLocalStorage("billboard")}
+                goal={getCurrentSectionTextFromLocalStorage("goal")}
+                week__md_text={getCurrentSectionTextFromLocalStorage(
+                  "checkbox-list--this-week"
+                )}
               />
               <div className="w-1/4">
                 <CalendarDaily_Section
-                  text={""}
+                  text={getCurrentSectionTextFromLocalStorage("today-hours")}
                   height={body_height}
                   currentDate={currentDate}
                 />
