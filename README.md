@@ -6,8 +6,7 @@ a productivity app to be your desktop mate
 
 - the data is saved in your browser's local storage
 
-<img width="838" alt="Screenshot 2024-02-22 at 09 42 31" src="https://github.com/sturm-dev/desk-mate/assets/30802967/3cafa1f0-4d0b-4233-b198-6f7a3aa328b5">
-
+<img width="776" alt="Screenshot 2024-02-22 at 12 10 41" src="https://github.com/sturm-dev/desk-mate/assets/30802967/d47dfbf1-ca72-4491-a3cd-6d8509d76c5a">
 
 ## How to use
 
