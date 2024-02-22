@@ -24,6 +24,8 @@
 .react-calendar__month-view > div {
   /* add to all div children */
   align-items: inherit !important;
+  flex: 1;
+  padding-bottom: 5px;
 }
 
 .react-calendar__month-view > div > div {
