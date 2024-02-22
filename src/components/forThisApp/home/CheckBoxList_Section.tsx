@@ -10,11 +10,31 @@ const checkboxUnchecked = "- [ ]"
 
 export const CheckBoxList_Section = ({
   mdText,
-  title
+  title,
+  updateCheckboxState
 }: {
   mdText: string | null | undefined
   title?: string
+  updateCheckboxState: (newMdText: string) => void
 }) => {
+  const onCheckboxClick = (text: string) => {
+    if (!text) return
+
+    const newMdText = mdText
+      ?.split("\n")
+      .map((line) => {
+        if (line.includes(text)) {
+          return line.includes(checkboxChecked)
+            ? line.replaceAll(checkboxChecked, checkboxUnchecked)
+            : line.replaceAll(checkboxUnchecked, checkboxChecked)
+        }
+        return line
+      })
+      .join("\n")
+
+    updateCheckboxState(newMdText || "")
+  }
+
   const formatMdText = (str: string) => {
     const createObjectsFromText = () => {
       const allText: {
@@ -47,7 +67,9 @@ export const CheckBoxList_Section = ({
           <div className="my-1.5 w-full bg-neutral-700" style={{ height: 1 }} />
         ) : (
           <>
-            <p className={`${checked ? "text-neutral-700" : ""} mr-1`}>
+            <p
+              className={`${checked ? "text-neutral-700" : ""} mr-1 cursor-pointer`}
+              onClick={() => onCheckboxClick(text || "")}>
               {checked ? "☑" : "◻️"}
             </p>
             <p className={`${checked ? "text-neutral-700 line-through" : ""}`}>

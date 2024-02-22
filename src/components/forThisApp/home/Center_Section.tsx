@@ -5,11 +5,13 @@ import { CheckBoxList_Section } from "./CheckBoxList_Section"
 export const Center_Section = ({
   goal,
   customQuote,
-  week__md_text
+  week__md_text,
+  updateCheckboxStateForThisWeek
 }: {
   goal: string
   customQuote: string
   week__md_text: string
+  updateCheckboxStateForThisWeek: (newMdText: string) => void
 }) => {
   return (
     <div className="flex flex-1 flex-col border-l border-r border-neutral-800">
@@ -20,7 +22,11 @@ export const Center_Section = ({
       </div>
       <div className="flex flex-row">
         <div className="flex flex-1">
-          <CheckBoxList_Section title="🗓️ This week" mdText={week__md_text} />
+          <CheckBoxList_Section
+            updateCheckboxState={updateCheckboxStateForThisWeek}
+            title="🗓️ This week"
+            mdText={week__md_text}
+          />
         </div>
         <div className="flex flex-1">
           <CalendarMonthPreview />

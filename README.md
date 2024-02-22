@@ -15,10 +15,23 @@ a productivity app to be your desktop mate
 
 ## Notes
 
-for today hours use the format:
+> for checkbox lists use the format: (--- is a line separator)
+
+```
+- [ ] task 1
+- [x] task 2
+---
+- [ ] task 3
+```
+
+> for today hours use the format:
+
 ```
 05:00 = wake up
 13:30 = lunch
 ```
+
+> for billboard use markdown format
+
 
 <!-- RUN `pnpm prepare` to initialize husky when project just cloned -->

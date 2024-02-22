@@ -20,7 +20,10 @@ export default function Index() {
   // ─────────────────────────────────────────────────────────────────────
 
   const { currentDate, dayOfTheYear } = useGetDateEveryMinute()
-  const { getCurrentSectionTextFromLocalStorage } = useLocalStorageSections({
+  const {
+    getCurrentSectionTextFromLocalStorage,
+    setCurrentSectionTextToLocalStorage
+  } = useLocalStorageSections({
     dayOfTheYear
   })
 
@@ -53,6 +56,12 @@ export default function Index() {
                   mdText={getCurrentSectionTextFromLocalStorage(
                     "checkbox-list--today"
                   )}
+                  updateCheckboxState={(newMdText: string) =>
+                    setCurrentSectionTextToLocalStorage(
+                      "checkbox-list--today",
+                      newMdText
+                    )
+                  }
                 />
                 <div className="flex flex-col">
                   <CheckBoxList_Section
@@ -60,6 +69,12 @@ export default function Index() {
                     mdText={getCurrentSectionTextFromLocalStorage(
                       "checkbox-list--do-not-forget"
                     )}
+                    updateCheckboxState={(newMdText: string) =>
+                      setCurrentSectionTextToLocalStorage(
+                        "checkbox-list--do-not-forget",
+                        newMdText
+                      )
+                    }
                   />
                 </div>
               </div>
@@ -69,6 +84,12 @@ export default function Index() {
                 week__md_text={getCurrentSectionTextFromLocalStorage(
                   "checkbox-list--this-week"
                 )}
+                updateCheckboxStateForThisWeek={(newMdText: string) =>
+                  setCurrentSectionTextToLocalStorage(
+                    "checkbox-list--this-week",
+                    newMdText
+                  )
+                }
               />
               <div className="w-1/4">
                 <CalendarDaily_Section
