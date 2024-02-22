@@ -1,7 +1,7 @@
 "use client"
 
+import dayjs from "dayjs"
 import { useState } from "react"
-import { Toaster } from "sonner"
 
 import { BgAnimatedGradient } from "@/components"
 import {
@@ -10,11 +10,11 @@ import {
   Right_Section
 } from "@/components/forThisApp/edit"
 import { SectionInterface, SectionsArray } from "@/constants"
-import { useGetDateEveryMinute } from "@/hooks"
 
 export default function Edit() {
-  const { currentDate, dayOfTheYear } = useGetDateEveryMinute()
-
+  const [selectedDayOfTheYear, setSelectedDayOfTheYear] = useState<string>(
+    dayjs().format("DD/MM/YYYY")
+  )
   const [sectionSelected, setSectionSelected] = useState<SectionInterface>(
     SectionsArray[0]
   )
@@ -23,10 +23,13 @@ export default function Edit() {
   return (
     <BgAnimatedGradient>
       <div className="flex w-full flex-1 flex-col">
-        <Header_Section currentDate={currentDate} />
+        <Header_Section
+          selectedDayOfTheYear={selectedDayOfTheYear}
+          setSelectedDayOfTheYear={setSelectedDayOfTheYear}
+        />
         <div className="flex flex-1">
           <Left_Section
-            dayOfTheYear={dayOfTheYear}
+            dayOfTheYear={selectedDayOfTheYear}
             sectionSelected={sectionSelected}
             setSectionSelected={setSectionSelected}
             currentSectionText={currentSectionText}
@@ -36,7 +39,6 @@ export default function Edit() {
             currentSectionText={currentSectionText}
             sectionSelected={sectionSelected}
           />
-          <Toaster richColors />
         </div>
       </div>
     </BgAnimatedGradient>

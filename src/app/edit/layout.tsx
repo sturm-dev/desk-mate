@@ -2,7 +2,7 @@ import { Toaster } from "sonner"
 
 import { Font_Mulish200 } from "@/fonts"
 
-import "./globals.css"
+import "../globals.css"
 
 export const metadata = {
   title: "desk mate",

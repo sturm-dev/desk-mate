@@ -1,37 +1,38 @@
 "use client"
 
 import {
-  ArrowLeftIcon
-  // ChevronDoubleLeftIcon,
-  // ChevronDoubleRightIcon,
-  // ChevronLeftIcon,
-  // ChevronRightIcon
+  ArrowLeftIcon,
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon
 } from "@heroicons/react/24/outline"
 import dayjs from "dayjs"
+import customParseFormat from "dayjs/plugin/customParseFormat"
 import { useRouter } from "next/navigation"
-import { MutableRefObject, useState } from "react"
+import { MutableRefObject } from "react"
 
 import { Touchable } from "@/components/generic"
 
+dayjs.extend(customParseFormat)
+
 export const Header_Section = ({
   ref_div,
-  currentDate
+  selectedDayOfTheYear,
+  setSelectedDayOfTheYear
 }: {
   ref_div?: MutableRefObject<HTMLDivElement | null>
-  currentDate: Date
+  selectedDayOfTheYear: string
+  setSelectedDayOfTheYear: (dayOfTheYear: string) => void
 }) => {
   const router = useRouter()
 
-  const [selectedDate, setSelectedDate] = useState(currentDate)
-
   const dateEdit = (editType: "plus" | "minus", dateType: "day" | "week") => {
-    let newDate = dayjs(selectedDate)
+    let newDate = dayjs(selectedDayOfTheYear, "DD/MM/YYYY")
     if (editType === "plus") newDate = newDate.add(1, dateType)
     else newDate = newDate.subtract(1, dateType)
 
-    setSelectedDate(newDate.toDate())
-
-    // TODO: after 3 seconds of no change date -> ask to db to data about that day
+    setSelectedDayOfTheYear(newDate.format("DD/MM/YYYY"))
   }
 
   const onGoToHome = () => router.replace("/")
@@ -51,7 +52,7 @@ export const Header_Section = ({
       {goBackComponent({ hide: false })}
       <div className="flex flex-1 items-center justify-center px-1">
         <div className="flex flex-1 flex-row items-center justify-center">
-          {/* <Touchable onClick={() => dateEdit("minus", "week")}>
+          <Touchable onClick={() => dateEdit("minus", "week")}>
             <ChevronDoubleLeftIcon
               color="gray"
               className={IconStyleClassNames}
@@ -59,13 +60,11 @@ export const Header_Section = ({
           </Touchable>
           <Touchable onClick={() => dateEdit("minus", "day")}>
             <ChevronLeftIcon color="gray" className={IconStyleClassNames} />
-          </Touchable> */}
-          {/* <Touchable> */}
+          </Touchable>
           <p className="m-3 w-60 rounded-sm bg-cyan-600 p-1 px-3 text-center text-sm">
-            {dayjs(selectedDate).format("dddd D of MMMM")}
+            {dayjs(selectedDayOfTheYear, "DD/MM/YYYY").format("dddd D of MMMM")}
           </p>
-          {/* </Touchable> */}
-          {/* <Touchable onClick={() => dateEdit("plus", "day")}>
+          <Touchable onClick={() => dateEdit("plus", "day")}>
             <ChevronRightIcon color="gray" className={IconStyleClassNames} />
           </Touchable>
           <Touchable onClick={() => dateEdit("plus", "week")}>
@@ -73,7 +72,7 @@ export const Header_Section = ({
               color="gray"
               className={IconStyleClassNames}
             />
-          </Touchable> */}
+          </Touchable>
         </div>
       </div>
       {goBackComponent({ hide: true })}

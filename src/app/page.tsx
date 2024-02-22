@@ -13,19 +13,13 @@ import {
   Header_Section
 } from "@/components/forThisApp/home"
 import { useGetDateEveryMinute, useGetDivDimensions } from "@/hooks"
-import { useLocalStorageSections } from "@/hooks/forThisApp"
+import { localStorageSections } from "@/utils/forThisApp"
 
 export default function Index() {
   const fullScreenHandle = useFullScreenHandle()
   // ─────────────────────────────────────────────────────────────────────
 
   const { currentDate, dayOfTheYear } = useGetDateEveryMinute()
-  const {
-    getCurrentSectionTextFromLocalStorage,
-    setCurrentSectionTextToLocalStorage
-  } = useLocalStorageSections({
-    dayOfTheYear
-  })
 
   // ─────────────────────────────────────────────────────────────────────
   const { dimensions: dimensions_divFather, div_ref: ref_divFather } =
@@ -53,11 +47,13 @@ export default function Index() {
                 {/* ───────────────────────────────────────────────────── */}
                 <CheckBoxList_Section
                   title={`📅 Today`}
-                  mdText={getCurrentSectionTextFromLocalStorage(
+                  mdText={localStorageSections.getText(
+                    dayOfTheYear,
                     "checkbox-list--today"
                   )}
                   updateCheckboxState={(newMdText: string) =>
-                    setCurrentSectionTextToLocalStorage(
+                    localStorageSections.setText(
+                      dayOfTheYear,
                       "checkbox-list--today",
                       newMdText
                     )
@@ -66,11 +62,13 @@ export default function Index() {
                 <div className="flex flex-col">
                   <CheckBoxList_Section
                     title="📌 Do not forget"
-                    mdText={getCurrentSectionTextFromLocalStorage(
+                    mdText={localStorageSections.getText(
+                      dayOfTheYear,
                       "checkbox-list--do-not-forget"
                     )}
                     updateCheckboxState={(newMdText: string) =>
-                      setCurrentSectionTextToLocalStorage(
+                      localStorageSections.setText(
+                        dayOfTheYear,
                         "checkbox-list--do-not-forget",
                         newMdText
                       )
@@ -79,13 +77,18 @@ export default function Index() {
                 </div>
               </div>
               <Center_Section
-                customQuote={getCurrentSectionTextFromLocalStorage("billboard")}
-                goal={getCurrentSectionTextFromLocalStorage("goal")}
-                week__md_text={getCurrentSectionTextFromLocalStorage(
+                customQuote={localStorageSections.getText(
+                  dayOfTheYear,
+                  "billboard"
+                )}
+                goal={localStorageSections.getText(dayOfTheYear, "goal")}
+                week__md_text={localStorageSections.getText(
+                  dayOfTheYear,
                   "checkbox-list--this-week"
                 )}
                 updateCheckboxStateForThisWeek={(newMdText: string) =>
-                  setCurrentSectionTextToLocalStorage(
+                  localStorageSections.setText(
+                    dayOfTheYear,
                     "checkbox-list--this-week",
                     newMdText
                   )
@@ -93,7 +96,10 @@ export default function Index() {
               />
               <div className="w-1/4">
                 <CalendarDaily_Section
-                  text={getCurrentSectionTextFromLocalStorage("today-hours")}
+                  text={localStorageSections.getText(
+                    dayOfTheYear,
+                    "today-hours"
+                  )}
                   height={body_height}
                   currentDate={currentDate}
                 />

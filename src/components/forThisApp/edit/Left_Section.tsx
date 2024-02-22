@@ -9,7 +9,7 @@ import {
   SectionsArrayReadableName
 } from "@/constants"
 import { useGetDivDimensions } from "@/hooks"
-import { useLocalStorageSections } from "@/hooks/forThisApp"
+import { localStorageSections } from "@/utils/forThisApp"
 
 import { HomeMiniLayout } from "../HomeMiniLayout"
 
@@ -26,10 +26,7 @@ export const Left_Section = ({
   currentSectionText: string
   setCurrentSectionText: (value: string) => void
 }) => {
-  const {
-    getCurrentSectionTextFromLocalStorage,
-    setCurrentSectionTextToLocalStorage
-  } = useLocalStorageSections({ dayOfTheYear })
+  console.log(`dayOfTheYear`, dayOfTheYear)
 
   const { dimensions: dimensions_fieldToEdit, div_ref: ref_fieldToEdit } =
     useGetDivDimensions()
@@ -37,10 +34,12 @@ export const Left_Section = ({
   // ─────────────────────────────────────────────────────────────────────
 
   useEffect(() => {
+    console.log(`useEffect - dayOfTheYear`, dayOfTheYear)
+
     setCurrentSectionText(
-      getCurrentSectionTextFromLocalStorage(sectionSelected)
+      localStorageSections.getText(dayOfTheYear, sectionSelected)
     )
-  }, [sectionSelected])
+  }, [sectionSelected, dayOfTheYear])
 
   // ─────────────────────────────────────────────────────────────────────
 
@@ -72,8 +71,22 @@ export const Left_Section = ({
     return SectionsArrayReadableName[sectionIndex]
   }
 
+  const getNote = (section: SectionInterface) => {
+    switch (section) {
+      case SectionsArray[0]:
+      case SectionsArray[5]:
+        return "(saved only for the date selected)"
+      default:
+        return "(saved for this section)"
+    }
+  }
+
   const saveEdits = () => {
-    setCurrentSectionTextToLocalStorage(sectionSelected, currentSectionText)
+    localStorageSections.setText(
+      dayOfTheYear,
+      sectionSelected,
+      currentSectionText
+    )
     toast.success("Saved!")
   }
 
@@ -107,7 +120,7 @@ export const Left_Section = ({
           </div>
         </Card>
       </div>
-      <Card title="Field to edit">
+      <Card title={`Field to edit ${getNote(sectionSelected)}`}>
         <div className="flex h-full flex-1" ref={ref_fieldToEdit}>
           <textarea
             value={currentSectionText}
