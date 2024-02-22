@@ -1,5 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
 import { useEffect } from "react"
+import { toast } from "sonner"
 
 import { Card, Touchable } from "@/components/generic"
 import {
@@ -73,8 +74,7 @@ export const Left_Section = ({
 
   const saveEdits = () => {
     setCurrentSectionTextToLocalStorage(sectionSelected, currentSectionText)
-    console.log("Saved!")
-    // TODO: show a toast
+    toast.success("Saved!")
   }
 
   return (

@@ -1,7 +1,5 @@
 # now
 
-- [ ] add toast of success when saved changes
-
 ---
 
 # later
@@ -16,3 +14,4 @@
 # someday
 
 - [ ] remove heroicons and use lucide instead
+- [ ] (fix) I don't know why can't call Toaster in root-layout - it's not working (for now used only on edit/Left_Section)

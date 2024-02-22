@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { Toaster } from "sonner"
 
 import { BgAnimatedGradient } from "@/components"
 import {
@@ -35,6 +36,7 @@ export default function Edit() {
             currentSectionText={currentSectionText}
             sectionSelected={sectionSelected}
           />
+          <Toaster richColors />
         </div>
       </div>
     </BgAnimatedGradient>
