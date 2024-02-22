@@ -1,19 +1,44 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
-import { useState } from "react"
+import { useEffect } from "react"
+import { useLocalStorage } from "usehooks-ts"
 
 import { Card, Touchable } from "@/components/generic"
-
 import {
-  HomeMiniLayout,
   SectionInterface,
   SectionsArray,
   SectionsArrayReadableName
-} from "../HomeMiniLayout"
+} from "@/constants"
+import { useGetDivDimensions } from "@/hooks"
 
-export const Left_Section = () => {
-  const [sectionSelected, setSectionSelected] = useState<SectionInterface>(
-    SectionsArray[0]
+import { HomeMiniLayout } from "../HomeMiniLayout"
+
+export const Left_Section = ({
+  dayOfTheYear,
+  sectionSelected,
+  setSectionSelected,
+  currentSectionText,
+  setCurrentSectionText
+}: {
+  dayOfTheYear: string
+  sectionSelected: SectionInterface
+  setSectionSelected: (section: SectionInterface) => void
+  currentSectionText: string
+  setCurrentSectionText: (value: string) => void
+}) => {
+  const [billboardText, setBillboardText] = useLocalStorage(
+    `${dayOfTheYear}-${SectionsArray[4]}`,
+    ""
   )
+  const { dimensions: dimensions_fieldToEdit, div_ref: ref_fieldToEdit } =
+    useGetDivDimensions()
+
+  // ─────────────────────────────────────────────────────────────────────
+
+  useEffect(() => {
+    setCurrentSectionText(billboardText)
+  }, [])
+
+  // ─────────────────────────────────────────────────────────────────────
 
   const changeSectionSelected = (chevronPressed: "left" | "right") => {
     const sectionSelectedIndex = SectionsArray.findIndex(
@@ -41,6 +66,12 @@ export const Left_Section = () => {
     )
 
     return SectionsArrayReadableName[sectionIndex]
+  }
+
+  const saveEdits = () => {
+    setBillboardText(currentSectionText)
+    console.log("Saved!")
+    // TODO: show a toast
   }
 
   return (
@@ -74,9 +105,18 @@ export const Left_Section = () => {
         </Card>
       </div>
       <Card title="Field to edit">
-        <p>field to edit</p>
+        <div className="flex h-full flex-1" ref={ref_fieldToEdit}>
+          <textarea
+            value={currentSectionText}
+            onChange={(e) => setCurrentSectionText(e.target.value)}
+            className="h-full w-full rounded-md bg-white bg-opacity-20 p-4"
+            style={{ height: dimensions_fieldToEdit.height }}
+          />
+        </div>
       </Card>
-      <Touchable className="mt-4 flex w-full items-center justify-center rounded-md bg-green-800 p-2">
+      <Touchable
+        className="mt-4 flex w-full items-center justify-center rounded-md bg-green-800 p-2"
+        onClick={saveEdits}>
         <p>Save</p>
       </Touchable>
     </div>

@@ -1,21 +1,30 @@
 "use client"
 
 import { FullScreen, useFullScreenHandle } from "react-full-screen"
+import { useLocalStorage } from "usehooks-ts"
 
-import { BgAnimatedGradient, YoutubeBgPlayer } from "@/components"
+import {
+  BgAnimatedGradient
+  // , YoutubeBgPlayer
+} from "@/components"
 import {
   CalendarDaily_Section,
   Center_Section,
   CheckBoxList_Section,
   Header_Section
 } from "@/components/forThisApp/home"
+import { SectionsArray } from "@/constants"
 import { useGetDateEveryMinute, useGetDivDimensions } from "@/hooks"
 
 export default function Index() {
   const fullScreenHandle = useFullScreenHandle()
   // ─────────────────────────────────────────────────────────────────────
 
-  const { currentDate } = useGetDateEveryMinute()
+  const { currentDate, dayOfTheYear } = useGetDateEveryMinute()
+  const [billboardText] = useLocalStorage(
+    `${dayOfTheYear}-${SectionsArray[4]}`,
+    ""
+  )
 
   // ─────────────────────────────────────────────────────────────────────
   const { dimensions: dimensions_divFather, div_ref: ref_divFather } =
@@ -47,7 +56,7 @@ export default function Index() {
                 </div>
               </div>
               <Center_Section
-                customQuote={""}
+                customQuote={billboardText}
                 dailyQuote={""}
                 goal={""}
                 week__md_text={""}
@@ -61,7 +70,7 @@ export default function Index() {
               </div>
             </div>
             {/* youtube video running on background to screen not to sleep */}
-            <YoutubeBgPlayer />
+            {/* <YoutubeBgPlayer /> */}
           </div>
         </div>
       </BgAnimatedGradient>

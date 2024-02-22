@@ -9,6 +9,8 @@ export const Card = ({
     <div className="border-b border-neutral-800 bg-black bg-opacity-40 p-2 px-4">
       <p className="text-sm">{title}</p>
     </div>
-    <div className="flex items-center justify-center p-2">{children}</div>
+    <div className="flex flex-1 items-center justify-center p-2">
+      {children}
+    </div>
   </div>
 )

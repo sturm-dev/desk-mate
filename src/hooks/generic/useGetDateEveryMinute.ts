@@ -1,3 +1,4 @@
+import dayjs from "dayjs"
 import { useEffect, useState } from "react"
 
 export const useGetDateEveryMinute = () => {
@@ -13,5 +14,5 @@ export const useGetDateEveryMinute = () => {
     }
   }, [])
 
-  return { currentDate }
+  return { currentDate, dayOfTheYear: dayjs(currentDate).format("DD/MM/YYYY") }
 }
