@@ -1,11 +1,11 @@
-import dayjs from "dayjs";
-import { useState } from "react";
-import Calendar from "react-calendar";
+import dayjs from "dayjs"
+import { useState } from "react"
+import Calendar from "react-calendar"
 
-import "./CalendarMonthPreview.css";
+import "./CalendarMonthPreview.css"
 
 export const CalendarMonthPreview = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(new Date())
 
   return (
     <div className="flex flex-1 border-l border-t border-neutral-800">
@@ -20,5 +20,5 @@ export const CalendarMonthPreview = () => {
         }
       />
     </div>
-  );
-};
+  )
+}

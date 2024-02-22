@@ -1,22 +1,21 @@
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 
-import { Font_Mulish200 } from "@/fonts";
-import { ReactMarkdown_ComponentsConfig } from "@/config";
+import { ReactMarkdown_ComponentsConfig } from "@/config"
+import { Font_Mulish200 } from "@/fonts"
 
 export const C_ReactMarkdown = ({ text }: { text: string }) => {
   return (
     <div style={{ fontFamily: Font_Mulish200.style.fontFamily }}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
-        className="prose lg:prose-xl dark:prose-invert"
-        components={ReactMarkdown_ComponentsConfig}
-      >
+        className="prose dark:prose-invert lg:prose-xl"
+        components={ReactMarkdown_ComponentsConfig}>
         {text}
       </ReactMarkdown>
     </div>
-  );
-};
+  )
+}
 
 // ─── Sources ──────────────────────────────────────────────────────────────────
 

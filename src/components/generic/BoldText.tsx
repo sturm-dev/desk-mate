@@ -1,7 +1,8 @@
-import { HTMLAttributes } from "react";
-import { Font_Lato400 } from "@/fonts";
+import { HTMLAttributes } from "react"
 
-type SpanProps = HTMLAttributes<HTMLSpanElement>;
+import { Font_Lato400 } from "@/fonts"
+
+type SpanProps = HTMLAttributes<HTMLSpanElement>
 
 export const BoldText = ({
   children,
@@ -10,4 +11,4 @@ export const BoldText = ({
   <span {...props} style={{ fontFamily: Font_Lato400.style.fontFamily }}>
     {children}
   </span>
-);
+)

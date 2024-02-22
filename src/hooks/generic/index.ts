@@ -1,2 +1,2 @@
-export * from "./useGetDivDimensions";
-export * from "./useGetDateEveryMinute";
+export * from "./useGetDivDimensions"
+export * from "./useGetDateEveryMinute"

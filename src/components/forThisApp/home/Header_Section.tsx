@@ -1,46 +1,46 @@
-"use client";
+"use client"
 
-import { MutableRefObject } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { FullScreenHandle } from "react-full-screen";
-import dayjs from "dayjs";
-import packageJson from "~/package.json";
 import {
   ArrowLeftOnRectangleIcon,
-  PencilSquareIcon,
-} from "@heroicons/react/24/outline";
+  PencilSquareIcon
+} from "@heroicons/react/24/outline"
+import packageJson from "~/package.json"
+import dayjs from "dayjs"
+import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { MutableRefObject } from "react"
+import { FullScreenHandle } from "react-full-screen"
 
-import { Image_EnterFullScreen, Image_ExitFullScreen } from "@/assets";
-import { BoldText, OptionsDropdown } from "@/components";
+import { Image_EnterFullScreen, Image_ExitFullScreen } from "@/assets"
+import { BoldText, OptionsDropdown } from "@/components"
 
 export const Header_Section = ({
   fullScreenHandle,
   ref_div,
-  currentDate,
+  currentDate
 }: {
-  fullScreenHandle: FullScreenHandle;
-  ref_div?: MutableRefObject<HTMLDivElement | null>;
-  currentDate: Date;
+  fullScreenHandle: FullScreenHandle
+  ref_div?: MutableRefObject<HTMLDivElement | null>
+  currentDate: Date
 }) => {
-  const router = useRouter();
+  const router = useRouter()
 
-  const onGoToEdit = () => router.push("/edit");
+  const onGoToEdit = () => router.push("/edit")
 
   const onSwitchFullScreenMode = () => {
-    if (fullScreenHandle.active) fullScreenHandle.exit();
-    else fullScreenHandle.enter();
-  };
+    if (fullScreenHandle.active) fullScreenHandle.exit()
+    else fullScreenHandle.enter()
+  }
 
   return (
     <div ref={ref_div} className="border-b border-neutral-800">
       <div className="flex items-center justify-center">
-        <div className="pl-2 flex items-center justify-center">
-          <BoldText className="text-2xl p-2">
+        <div className="flex items-center justify-center pl-2">
+          <BoldText className="p-2 text-2xl">
             {dayjs(currentDate).format("HH:mm")}
           </BoldText>
           -
-          <span className="text-sm p-2">
+          <span className="p-2 text-sm">
             {dayjs(currentDate).format("dddd D of MMMM")}
           </span>
         </div>
@@ -71,12 +71,11 @@ export const Header_Section = ({
             {
               title: "Edit fields",
               onClick: onGoToEdit,
-              icon: PencilSquareIcon,
-              showOnlyOnDesktop: true,
-            },
+              icon: PencilSquareIcon
+            }
           ]}
         />
       </div>
     </div>
-  );
-};
+  )
+}
