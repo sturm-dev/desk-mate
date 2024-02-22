@@ -10,7 +10,6 @@ export const OptionsDropdown = ({
     title: string;
     onClick: () => void;
     icon: typeof UserCircleIcon;
-    showOnlyOnDesktop?: boolean;
   }[];
   footerComponent?: React.ReactNode;
 }) => {
@@ -28,18 +27,11 @@ export const OptionsDropdown = ({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute z-10 right-2 mt-2 origin-top-right divide-y divide-neutral-700 rounded-md bg-neutral-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="p-4 flex flex-row items-center pr-6">
-            <UserCircleIcon className="ml-2 mr-2 h-6 w-6 text-neutral-500" />
-            <span className="text-neutral-500">asd@asd.asd</span>
-          </div>
+        <Menu.Items className="absolute z-10 w-40 right-2 mt-2 origin-top-right divide-y divide-neutral-700 rounded-md bg-neutral-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           {items.map((item) => {
             const Icon = item.icon;
             return (
-              <div
-                key={item.title}
-                className={item.showOnlyOnDesktop ? "hidden xl:block" : ""}
-              >
+              <div key={item.title}>
                 <Menu.Item>
                   <button
                     className="flex flex-row p-4 pr-6 items-center w-full"

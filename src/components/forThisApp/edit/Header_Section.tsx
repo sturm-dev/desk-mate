@@ -1,10 +1,12 @@
+// TODO: later implement select the day from calendar-picker
+
 "use client";
 
 import { MutableRefObject, useState } from "react";
 import { useRouter } from "next/navigation";
 import packageJson from "~/package.json";
 import {
-  ArrowLeftOnRectangleIcon,
+  ArrowLeftIcon,
   CalendarDaysIcon,
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
@@ -36,13 +38,23 @@ export const Header_Section = ({
     // TODO: after 3 seconds of no change date -> ask to db to data about that day
   };
 
+  const onGoToHome = () => router.replace("/");
+
+  const goBackComponent = ({ hide }: { hide?: boolean }) => (
+    <div className={`${hide ? "opacity-0" : ""}`}>
+      <Touchable className="p-2" onClick={onGoToHome}>
+        <ArrowLeftIcon color="gray" className={IconStyleClassNames} />
+      </Touchable>
+    </div>
+  );
+
   return (
-    <div ref={ref_div} className="border-b border-neutral-800">
-      <div className="flex items-center justify-center px-1">
-        {/* TODO: later implement the calendar selection */}
-        <Touchable style={{ opacity: 0 }}>
-          <CalendarDaysIcon className={IconStyleClassNames} />
-        </Touchable>
+    <div
+      ref={ref_div}
+      className="border-b border-neutral-800 flex items-center justify-center"
+    >
+      {goBackComponent({ hide: false })}
+      <div className="flex flex-1 items-center justify-center px-1">
         <div className="flex-1 items-center justify-center flex flex-row">
           <Touchable onClick={() => dateEdit("minus", "week")}>
             <ChevronDoubleLeftIcon
@@ -69,6 +81,7 @@ export const Header_Section = ({
           </Touchable>
         </div>
       </div>
+      {goBackComponent({ hide: true })}
     </div>
   );
 };

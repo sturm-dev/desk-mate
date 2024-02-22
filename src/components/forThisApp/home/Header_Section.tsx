@@ -72,7 +72,6 @@ export const Header_Section = ({
               title: "Edit fields",
               onClick: onGoToEdit,
               icon: PencilSquareIcon,
-              showOnlyOnDesktop: true,
             },
           ]}
         />
