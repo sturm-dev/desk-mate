@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 const separatorMdText = "---"
 const checkboxChecked = "- [x]"
@@ -9,18 +9,27 @@ const checkboxUnchecked = "- [ ]"
 // NOTE: this component not handle all markdown text - only checkbox and separator
 
 export const CheckBoxList_Section = ({
+  getText,
   mdText,
   title,
   updateCheckboxState
 }: {
-  mdText: string | null | undefined
+  getText?: () => string
   title?: string
+  mdText?: string
   updateCheckboxState?: (newMdText: string) => void
 }) => {
+  const [currentText, setCurrentText] = useState("")
+
+  useEffect(() => {
+    if (mdText) setCurrentText(mdText)
+    else if (getText) setCurrentText(getText())
+  }, [])
+
   const onCheckboxClick = (text: string) => {
     if (!text || !updateCheckboxState) return
 
-    const newMdText = mdText
+    const newMdText = currentText
       ?.split("\n")
       .map((line) => {
         if (line.includes(text)) {
@@ -32,7 +41,8 @@ export const CheckBoxList_Section = ({
       })
       .join("\n")
 
-    updateCheckboxState(newMdText || "")
+    updateCheckboxState(newMdText)
+    if (getText) setCurrentText(getText())
   }
 
   const formatMdText = (str: string) => {
@@ -99,7 +109,7 @@ export const CheckBoxList_Section = ({
         </div>
       ) : null}
       <div className="flex-col p-2 pl-3 text-sm">
-        {formatMdText(mdText || "")}
+        {formatMdText(currentText || "")}
       </div>
     </div>
   )

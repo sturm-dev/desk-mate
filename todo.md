@@ -14,4 +14,3 @@
 # someday
 
 - [ ] remove heroicons and use lucide instead
-- [ ] find a way to have only one layout for all pages

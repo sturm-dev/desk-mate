@@ -47,10 +47,12 @@ export default function Index() {
                 {/* ───────────────────────────────────────────────────── */}
                 <CheckBoxList_Section
                   title={`📅 Today`}
-                  mdText={localStorageSections.getText(
-                    dayOfTheYear,
-                    "checkbox-list--today"
-                  )}
+                  getText={() =>
+                    localStorageSections.getText(
+                      dayOfTheYear,
+                      "checkbox-list--today"
+                    )
+                  }
                   updateCheckboxState={(newMdText: string) =>
                     localStorageSections.setText(
                       dayOfTheYear,
@@ -62,10 +64,12 @@ export default function Index() {
                 <div className="flex flex-col">
                   <CheckBoxList_Section
                     title="📌 Do not forget"
-                    mdText={localStorageSections.getText(
-                      dayOfTheYear,
-                      "checkbox-list--do-not-forget"
-                    )}
+                    getText={() =>
+                      localStorageSections.getText(
+                        dayOfTheYear,
+                        "checkbox-list--do-not-forget"
+                      )
+                    }
                     updateCheckboxState={(newMdText: string) =>
                       localStorageSections.setText(
                         dayOfTheYear,
@@ -77,15 +81,18 @@ export default function Index() {
                 </div>
               </div>
               <Center_Section
-                customQuote={localStorageSections.getText(
-                  dayOfTheYear,
-                  "billboard"
-                )}
-                goal={localStorageSections.getText(dayOfTheYear, "goal")}
-                week__md_text={localStorageSections.getText(
-                  dayOfTheYear,
-                  "checkbox-list--this-week"
-                )}
+                getBillboardText={() =>
+                  localStorageSections.getText(dayOfTheYear, "billboard")
+                }
+                getGoalText={() =>
+                  localStorageSections.getText(dayOfTheYear, "goal")
+                }
+                getWeekText={() =>
+                  localStorageSections.getText(
+                    dayOfTheYear,
+                    "checkbox-list--this-week"
+                  )
+                }
                 updateCheckboxStateForThisWeek={(newMdText: string) =>
                   localStorageSections.setText(
                     dayOfTheYear,
