@@ -31,7 +31,10 @@ export default function Edit() {
             currentSectionText={currentSectionText}
             setCurrentSectionText={setCurrentSectionText}
           />
-          <Right_Section currentSectionText={currentSectionText} />
+          <Right_Section
+            currentSectionText={currentSectionText}
+            sectionSelected={sectionSelected}
+          />
         </div>
       </div>
     </BgAnimatedGradient>

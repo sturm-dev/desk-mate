@@ -15,10 +15,10 @@ export const CheckBoxList_Section = ({
 }: {
   mdText: string | null | undefined
   title?: string
-  updateCheckboxState: (newMdText: string) => void
+  updateCheckboxState?: (newMdText: string) => void
 }) => {
   const onCheckboxClick = (text: string) => {
-    if (!text) return
+    if (!text || !updateCheckboxState) return
 
     const newMdText = mdText
       ?.split("\n")
@@ -39,6 +39,7 @@ export const CheckBoxList_Section = ({
     const createObjectsFromText = () => {
       const allText: {
         text?: string
+        haveCheckbox?: boolean
         checked?: boolean
         separator?: boolean
       }[] = []
@@ -53,32 +54,41 @@ export const CheckBoxList_Section = ({
         }
 
         const checked = line.includes(checkboxChecked)
+        const haveCheckbox =
+          line.includes(checkboxChecked) || line.includes(checkboxUnchecked)
+
         const text = line
           .replaceAll(checkboxChecked, "")
           .replaceAll(checkboxUnchecked, "")
-        allText.push({ text, checked })
+        allText.push({ text, checked, haveCheckbox })
       })
       return allText
     }
 
-    return createObjectsFromText().map(({ separator, checked, text }, i) => (
-      <div key={i} className="flex flex-row">
-        {separator ? (
-          <div className="my-1.5 w-full bg-neutral-700" style={{ height: 1 }} />
-        ) : (
-          <>
-            <p
-              className={`${checked ? "text-neutral-700" : ""} mr-1 cursor-pointer`}
-              onClick={() => onCheckboxClick(text || "")}>
-              {checked ? "☑" : "◻️"}
-            </p>
-            <p className={`${checked ? "text-neutral-700 line-through" : ""}`}>
-              {text}
-            </p>
-          </>
-        )}
-      </div>
-    ))
+    return createObjectsFromText().map(
+      ({ separator, checked, haveCheckbox, text }, i) => (
+        <div key={i} className="flex flex-row">
+          {separator ? (
+            <div
+              className="my-1.5 w-full bg-neutral-700"
+              style={{ height: 1 }}
+            />
+          ) : haveCheckbox ? (
+            <>
+              <p
+                className={`${checked ? "text-neutral-700" : ""} mr-1 ${updateCheckboxState ? "cursor-pointer" : ""}`}
+                onClick={() => onCheckboxClick(text || "")}>
+                {checked ? "☑" : "◻️"}
+              </p>
+              <p
+                className={`${checked ? "text-neutral-700 line-through" : ""}`}>
+                {text}
+              </p>
+            </>
+          ) : null}
+        </div>
+      )
+    )
   }
 
   return (

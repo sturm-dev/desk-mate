@@ -1,7 +1,5 @@
 # now
 
-- [ ] when click on check icons - change the state and save
-- [ ] preview of the checkbox items
 - [ ] preview of the hours
 - [ ] add toast of success when saved changes
 
