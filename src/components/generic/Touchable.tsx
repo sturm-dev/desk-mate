@@ -1,6 +1,6 @@
-import { HTMLAttributes, useState } from "react";
+import { HTMLAttributes, useState } from "react"
 
-type DivProps = HTMLAttributes<HTMLDivElement>;
+type DivProps = HTMLAttributes<HTMLDivElement>
 
 export const Touchable = ({
   children,
@@ -8,11 +8,11 @@ export const Touchable = ({
   className,
   ...props
 }: {
-  children?: React.ReactNode;
-  onClick?: () => void;
-  className?: DivProps["className"];
+  children?: React.ReactNode
+  onClick?: () => void
+  className?: DivProps["className"]
 } & DivProps) => {
-  const [fade, setFade] = useState(false);
+  const [fade, setFade] = useState(false)
 
   return (
     <div
@@ -22,9 +22,8 @@ export const Touchable = ({
       onClick={onClick}
       onMouseDown={() => setFade(true)}
       onMouseUp={() => setTimeout(() => setFade(false), 100)}
-      {...props}
-    >
+      {...props}>
       {children}
     </div>
-  );
-};
+  )
+}

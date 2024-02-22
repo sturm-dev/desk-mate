@@ -1,1 +1,1 @@
-export * from "./ReactMarkdown";
+export * from "./ReactMarkdown"

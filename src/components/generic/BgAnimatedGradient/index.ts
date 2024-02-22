@@ -1,1 +1,1 @@
-export * from "./BgAnimatedGradient";
+export * from "./BgAnimatedGradient"

@@ -1,7 +1,7 @@
-import { Touchable } from "../generic";
+import { Touchable } from "../generic"
 
-const width = 1024 * 0.2;
-const height = 600 * 0.2;
+const width = 1024 * 0.2
+const height = 600 * 0.2
 
 export const SectionsArray = [
   "checkbox-list--today",
@@ -9,8 +9,8 @@ export const SectionsArray = [
   "checkbox-list--this-week",
   "goal",
   "billboard",
-  "today-hours",
-] as const;
+  "today-hours"
+] as const
 
 export const SectionsArrayReadableName = [
   `Checkbox list\n Today`,
@@ -18,28 +18,26 @@ export const SectionsArrayReadableName = [
   `Checkbox list\n This week`,
   "Goal",
   "Billboard",
-  "Today hours",
-] as const;
+  "Today hours"
+] as const
 
-export type SectionInterface = (typeof SectionsArray)[number];
+export type SectionInterface = (typeof SectionsArray)[number]
 
 export const HomeMiniLayout = ({
   sectionSelected,
-  setSectionSelected,
+  setSectionSelected
 }: {
-  sectionSelected: SectionInterface;
-  setSectionSelected: (section: SectionInterface) => void;
+  sectionSelected: SectionInterface
+  setSectionSelected: (section: SectionInterface) => void
 }) => {
   return (
     <div
       className="flex flex-col border border-neutral-500"
-      style={{ width, height }}
-    >
-      <div className="flex flex-1 w-full">
+      style={{ width, height }}>
+      <div className="flex w-full flex-1">
         <div
           className="flex flex-col border-r border-neutral-500"
-          style={{ width: width * 0.25 }}
-        >
+          style={{ width: width * 0.25 }}>
           <Touchable
             onClick={() => setSectionSelected("checkbox-list--today")}
             className={`border-b border-neutral-500 ${
@@ -82,7 +80,7 @@ export const HomeMiniLayout = ({
               }`}
               style={{ width: "50%" }}
             />
-            <div className="bg-neutral-900 flex flex-1" />
+            <div className="flex flex-1 bg-neutral-900" />
           </div>
         </div>
         <Touchable
@@ -94,5 +92,5 @@ export const HomeMiniLayout = ({
         />
       </div>
     </div>
-  );
-};
+  )
+}
