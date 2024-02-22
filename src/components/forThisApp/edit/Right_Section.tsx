@@ -26,7 +26,7 @@ export const Right_Section = ({
       case "today-hours":
         return (
           <div ref={div_ref} className="flex h-full flex-1">
-            <div style={{ height: dimensions.height }}>
+            <div className="flex flex-1" style={{ height: dimensions.height }}>
               <DailyHours
                 text={currentSectionText}
                 height={dimensions.height}
