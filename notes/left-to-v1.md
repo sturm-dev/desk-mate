@@ -1,2 +1,0 @@
-- [ ] basic structure
-- [ ] basic admin panel
