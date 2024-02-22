@@ -4,7 +4,7 @@ import "./globals.css"
 
 export const metadata = {
   title: "desk mate",
-  description: "a good virtual mate to help you organize your to-do items"
+  description: "a productivity-todo app to be your desktop mate"
 }
 
 export default function RootLayout({

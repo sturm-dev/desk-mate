@@ -48,7 +48,9 @@ export const Header_Section = ({
         <div className="pr-2">
           <span className="text-2xl">🐒</span>
         </div>
-        <div className="pr-1">
+        <div
+          className="cursor-pointer pr-1"
+          onClick={() => window.open("https://github.com/sturm-dev/desk-mate")}>
           <span className="text-sm text-neutral-500">
             desk-mate{" - "}
             <BoldText>v{packageJson.version}</BoldText>
