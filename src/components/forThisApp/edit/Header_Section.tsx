@@ -3,7 +3,6 @@
 import { MutableRefObject, useState } from "react";
 import { useRouter } from "next/navigation";
 import packageJson from "~/package.json";
-import { User } from "@supabase/auth-helpers-nextjs";
 import {
   ArrowLeftOnRectangleIcon,
   CalendarDaysIcon,
@@ -14,26 +13,18 @@ import {
 } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 
-import { supabaseClient } from "@/db";
 import { BoldText, OptionsDropdown, Touchable } from "@/components/generic";
 
 export const Header_Section = ({
-  user,
   ref_div,
   currentDate,
 }: {
-  user: User;
   ref_div?: MutableRefObject<HTMLDivElement | null>;
   currentDate: Date;
 }) => {
   const router = useRouter();
 
   const [selectedDate, setSelectedDate] = useState(currentDate);
-
-  const signOut = async () => {
-    await supabaseClient.auth.signOut();
-    router.push("/login");
-  };
 
   const dateEdit = (editType: "plus" | "minus", dateType: "day" | "week") => {
     let newDate = dayjs(selectedDate);
@@ -77,17 +68,6 @@ export const Header_Section = ({
             />
           </Touchable>
         </div>
-        <OptionsDropdown
-          userEmail={user.email!}
-          items={[
-            {
-              title: "Logout",
-              onClick: signOut,
-              icon: ArrowLeftOnRectangleIcon,
-            },
-          ]}
-          footerComponent={<AppVersion />}
-        />
       </div>
     </div>
   );

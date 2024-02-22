@@ -6,33 +6,24 @@ import Image from "next/image";
 import { FullScreenHandle } from "react-full-screen";
 import dayjs from "dayjs";
 import packageJson from "~/package.json";
-import { User } from "@supabase/auth-helpers-nextjs";
 import {
   ArrowLeftOnRectangleIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/outline";
 
 import { Image_EnterFullScreen, Image_ExitFullScreen } from "@/assets";
-import { supabaseClient } from "@/db";
 import { BoldText, OptionsDropdown } from "@/components";
 
 export const Header_Section = ({
-  user,
   fullScreenHandle,
   ref_div,
   currentDate,
 }: {
-  user: User;
   fullScreenHandle: FullScreenHandle;
   ref_div?: MutableRefObject<HTMLDivElement | null>;
   currentDate: Date;
 }) => {
   const router = useRouter();
-
-  const signOut = async () => {
-    await supabaseClient.auth.signOut();
-    router.push("/login");
-  };
 
   const onGoToEdit = () => router.push("/edit");
 
@@ -76,18 +67,12 @@ export const Header_Section = ({
           />
         </button>
         <OptionsDropdown
-          userEmail={user.email!}
           items={[
             {
               title: "Edit fields",
               onClick: onGoToEdit,
               icon: PencilSquareIcon,
               showOnlyOnDesktop: true,
-            },
-            {
-              title: "Logout",
-              onClick: signOut,
-              icon: ArrowLeftOnRectangleIcon,
             },
           ]}
         />

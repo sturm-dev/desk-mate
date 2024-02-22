@@ -3,12 +3,7 @@
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 import { FullLoading, BgAnimatedGradient, YoutubeBgPlayer } from "@/components";
-import {
-  useAuthRedirect,
-  useGetDateEveryMinute,
-  useGetDivDimensions,
-} from "@/hooks";
-import { useAllDataBy, useAppData, useUser } from "@/db";
+import { useGetDateEveryMinute, useGetDivDimensions } from "@/hooks";
 
 import {
   CalendarDaily_Section,
@@ -19,10 +14,6 @@ import {
 
 export default function Index() {
   const fullScreenHandle = useFullScreenHandle();
-  const { authLoading } = useAuthRedirect();
-  const { user } = useUser({ authLoading });
-  const { dataByDay, dataByUser, dataByWeek } = useAllDataBy({ user });
-  const { appData } = useAppData({ user });
   // ─────────────────────────────────────────────────────────────────────
 
   const { currentDate } = useGetDateEveryMinute();
@@ -37,8 +28,6 @@ export default function Index() {
     dimensions_divFather?.height - dimensions_divHeader?.height;
   // ─────────────────────────────────────────────────────────────────────
 
-  if (authLoading || !user) return <FullLoading />;
-
   return (
     <FullScreen handle={fullScreenHandle}>
       <BgAnimatedGradient>
@@ -49,31 +38,24 @@ export default function Index() {
               ref_div={ref_divHeader}
               fullScreenHandle={fullScreenHandle}
               currentDate={currentDate}
-              user={user}
             />
             <div className="flex flex-1 flex-row">
               <div className="flex w-1/4 flex-col" style={{ marginTop: -1 }}>
                 {/* ───────────────────────────────────────────────────── */}
-                <CheckBoxList_Section
-                  title={`📅 Today`}
-                  mdText={dataByDay?.md_text}
-                />
+                <CheckBoxList_Section title={`📅 Today`} mdText={``} />
                 <div className="flex flex-col">
-                  <CheckBoxList_Section
-                    title="📌 Do not forget"
-                    mdText={dataByUser?.do_not_forget__md_text}
-                  />
+                  <CheckBoxList_Section title="📌 Do not forget" mdText={``} />
                 </div>
               </div>
               <Center_Section
-                customQuote={dataByUser?.custom_quote__md_text}
-                dailyQuote={appData?.daily_quote__md_text}
-                goal={dataByUser?.goal}
-                week__md_text={dataByWeek?.md_text}
+                customQuote={""}
+                dailyQuote={""}
+                goal={""}
+                week__md_text={""}
               />
               <div className="w-1/4">
                 <CalendarDaily_Section
-                  text={dataByDay?.calendar_text}
+                  text={""}
                   height={body_height}
                   currentDate={currentDate}
                 />

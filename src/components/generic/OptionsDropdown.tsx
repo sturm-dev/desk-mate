@@ -3,11 +3,9 @@ import { Fragment } from "react";
 import { UserCircleIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
 
 export const OptionsDropdown = ({
-  userEmail,
   items,
   footerComponent,
 }: {
-  userEmail: string;
   items: {
     title: string;
     onClick: () => void;
@@ -33,7 +31,7 @@ export const OptionsDropdown = ({
         <Menu.Items className="absolute z-10 right-2 mt-2 origin-top-right divide-y divide-neutral-700 rounded-md bg-neutral-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="p-4 flex flex-row items-center pr-6">
             <UserCircleIcon className="ml-2 mr-2 h-6 w-6 text-neutral-500" />
-            <span className="text-neutral-500">{userEmail}</span>
+            <span className="text-neutral-500">asd@asd.asd</span>
           </div>
           {items.map((item) => {
             const Icon = item.icon;
