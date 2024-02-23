@@ -8,26 +8,37 @@ const checkboxUnchecked = "- [ ]"
 
 // NOTE: this component not handle all markdown text - only checkbox and separator
 
-export const CheckBoxList_Section = ({
-  getText,
-  mdText,
-  title,
-  updateCheckboxState
-}: {
-  getText?: () => string
-  title?: string
-  mdText?: string
+type CheckBoxList_GetTextProps = {
+  getText: () => string
+  title: string
   updateCheckboxState?: (newMdText: string) => void
-}) => {
+  // ────────────
+  mdText?: never
+}
+
+type CheckBoxList_MdTextProps = {
+  mdText: string
+  // ────────────
+  getText?: never
+  updateCheckboxState?: never
+  title?: never
+}
+
+export const CheckBoxList_Section = ({
+  mdText,
+  getText,
+  updateCheckboxState,
+  title
+}: CheckBoxList_GetTextProps | CheckBoxList_MdTextProps) => {
   const [currentText, setCurrentText] = useState("")
 
   useEffect(() => {
-    if (mdText) setCurrentText(mdText)
-    else if (getText) setCurrentText(getText())
-  }, [])
+    const text = mdText ? mdText : (getText && getText()) || ""
+    setCurrentText(text)
+  }, [mdText])
 
   const onCheckboxClick = (text: string) => {
-    if (!text || !updateCheckboxState) return
+    if (!updateCheckboxState) return
 
     const newMdText = currentText
       ?.split("\n")
@@ -42,7 +53,7 @@ export const CheckBoxList_Section = ({
       .join("\n")
 
     updateCheckboxState(newMdText)
-    if (getText) setCurrentText(getText())
+    setCurrentText(getText())
   }
 
   const formatMdText = (str: string) => {
